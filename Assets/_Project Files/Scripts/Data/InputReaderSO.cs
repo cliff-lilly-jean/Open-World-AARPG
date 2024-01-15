@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 
 
-[CreateAssetMenu(fileName = "InputReader", menuName = "InputReader")]
+[CreateAssetMenu(fileName = "InputReader", menuName = "New InputReader")]
 public class InputReader : ScriptableObject, GameControls.IGameplayActions, GameControls.IUIActions
 {
 

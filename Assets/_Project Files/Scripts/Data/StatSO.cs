@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "Stat", menuName = "Stats/Stat")]
+[CreateAssetMenu(fileName = "New Stat", menuName = "Stats/Stat")]
 public class StatSO : ScriptableObject
 {
     [Header("Physical")]
