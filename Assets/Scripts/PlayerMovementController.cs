@@ -1,12 +1,14 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementController : MonoBehaviour
 {
 
-    private float moveSpeed = 1f;
-    private float jumpForce = 3f;
-    private float _remainingJumps = 1;
+    private float moveSpeed = 2.5f;
+    private float jumpForce = 10f;
+    private float _distanceToGround;
+    private bool _isGrounded = false;
 
     GameControls actions;
 
@@ -19,9 +21,11 @@ public class PlayerMovementController : MonoBehaviour
     {
         actions = new GameControls();
         actions.Gameplay.Jump.performed += _ => OnJump();
-        _moveVector = actions.Gameplay.Move.ReadValue<Vector2>();
 
-        _playerRigidBody = this.GetComponent<Rigidbody>();
+
+        _playerRigidBody = GetComponent<Rigidbody>();
+        // _distanceToGround = GetComponent<Collider>().bounds.extents.y;
+        _distanceToGround = GetComponentInChildren<Collider>().bounds.extents.y;
     }
 
     // Update is called once per frame
@@ -44,8 +48,16 @@ public class PlayerMovementController : MonoBehaviour
     #region Methods
     public void OnJump()
     {
+        if (!Physics.Raycast(transform.position, -Vector3.up, _distanceToGround + 0.1f))
+        {
+            _isGrounded = false;
+        }
+        else
+        {
+            _isGrounded = true;
+            _playerRigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
 
-        _playerRigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
     }
 
@@ -53,9 +65,7 @@ public class PlayerMovementController : MonoBehaviour
     {
 
         _moveVector = actions.Gameplay.Move.ReadValue<Vector2>();
-        // _playerRigidBody.AddForce(new Vector3(_moveVector.x, 0, _moveVector.y) * moveSpeed, ForceMode.Impulse);
-        // Debug.Log(_moveVector.y);
-        CameraRelativeMovement(_moveVector);
+        CameraRelativeMovement(_moveVector); // TODO: Fix speed of diagonal movement
 
     }
 
@@ -78,8 +88,7 @@ public class PlayerMovementController : MonoBehaviour
         // Create Camera relative movement
         Vector3 _cameraRelativeMovement = _forwardRelativeVerticalInput + _rightRelativeHorizontalInput;
 
-        // transform.Translate(_cameraRelativeMovement);
-        _playerRigidBody.AddForce(new Vector3(_cameraRelativeMovement.x, 0, _cameraRelativeMovement.z) * moveSpeed, ForceMode.Impulse);
+        transform.Translate(_cameraRelativeMovement * moveSpeed * Time.fixedDeltaTime);
     }
 
     #endregion
