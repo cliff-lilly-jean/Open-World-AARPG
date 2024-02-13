@@ -8,12 +8,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rb;
     private Vector3 _direction;
 
-    [SerializeField]
-    private float _speed;
-    [SerializeField]
-    private float _smoothTime = 0.05f;
+    [SerializeField] private float _speed;
+    [SerializeField] private float _smoothTime = 0.05f;
+    [SerializeField] public float _jumpStrength;
 
     private float _currentVelocity;
+    private float _groundCheck;
+    private float _bufferDistance = 0.01f;
+    private bool _isGrounded = false;
 
     private void Awake()
     {
@@ -39,19 +41,15 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        Debug.Log("Jump pressed");
-        /*
-            1. Get when button is pressed
-            2. Add force/velocity to the y axis
-        */
+        if (!context.started) return;
+        GroundCheck();
     }
 
 
     public void Walk()
     {
         LookRotation();
-        Vector3 movement = new Vector3(_direction.x, 0f, _direction.y);
-        _rb.AddForce(movement * _speed);
+        WalkSpeed();
     }
 
     public void LookRotation()
@@ -68,5 +66,43 @@ public class PlayerController : MonoBehaviour
     {
         var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, direction, ref _currentVelocity, _smoothTime);
         return angle;
+    }
+
+    public void GroundCheck()
+    {
+        // Create a capsule buffer
+        _groundCheck = (GetComponent<CapsuleCollider>().height / 2) + _bufferDistance;
+
+        //Perform a raycast down
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, -transform.up, out hit, _groundCheck))
+        {
+            // If grounded, Run the jump action
+            _isGrounded = true;
+            AddJumpForce();
+        }
+        else
+        {
+            // ray didn't hit ground
+            _isGrounded = false;
+        }
+    }
+
+    public void WalkSpeed()
+    {
+        Vector3 movement = new Vector3(_direction.x, 0f, _direction.y);
+        _rb.AddForce(movement * _speed);
+    }
+
+    public void AddJumpForce()
+    {
+        _rb.AddForce(transform.up * _jumpStrength, ForceMode.Impulse);
+        /*
+            ***Less Floaty Jump***
+            - Determine if player is in the air
+            - Add gravity/mass to player
+            - Determine if player is on the ground
+            - reset gravity/mass
+        */
     }
 }
