@@ -2,12 +2,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovementController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private Vector2 _inputVector;
     private Rigidbody _rb;
     private Vector3 _direction;
-
 
     [SerializeField]
     private float _speed;
@@ -36,6 +35,15 @@ public class PlayerMovementController : MonoBehaviour
         // Convert input variables
         _direction.x = _inputVector.x;
         _direction.y = _inputVector.y;
+    }
+
+    public void Jump(InputAction.CallbackContext context)
+    {
+        Debug.Log("Jump pressed");
+        /*
+            1. Get when button is pressed
+            2. Add force/velocity to the y axis
+        */
     }
 
 
