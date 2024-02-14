@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     private float _velocity;
     private bool _isGrounded = true;
 
+    public Transform cam;
+
 
     private void Awake()
     {
@@ -31,7 +33,8 @@ public class PlayerController : MonoBehaviour
     {
 
         if (_inputVector.sqrMagnitude == 0) return;
-        Walk();
+        ApplyMovement();
+
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -40,38 +43,34 @@ public class PlayerController : MonoBehaviour
         _inputVector = context.ReadValue<Vector2>();
 
         // Convert input variables
-        _direction.x = _inputVector.x;
-        _direction.y = _inputVector.y;
+        _direction = _inputVector;
+
+    }
+
+    public void ApplyMovement()
+    {
+        // Get direction angles
+        var lookDirection = Mathf.Atan2(_direction.x, _direction.y) * Mathf.Rad2Deg + cam.eulerAngles.y;
+        var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, lookDirection, ref _currentVelocity, _smoothTime);
+
+        // Rotate the transform in the lookDirection
+        transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+        // Move the player in the direction of the rotation
+        Vector3 moveDirection = Quaternion.Euler(0f, lookDirection, 0f) * Vector3.forward;
+        _rb.AddForce(moveDirection.normalized * _speed);
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
         if (!context.started) return;
         GroundCheck();
+        if (_isGrounded)
+        {
+            AddJumpForce();
+        }
     }
 
-
-    public void Walk()
-    {
-        LookRotation();
-        WalkSpeed();
-    }
-
-    public void LookRotation()
-    {
-        // Get direction angles
-        var lookDirection = Mathf.Atan2(_direction.x, _direction.y) * Mathf.Rad2Deg;
-        var rotationAngle = RotationSmoothing(lookDirection);
-
-        // Rotate the transform in the lookDirection
-        transform.rotation = Quaternion.Euler(0f, rotationAngle, 0f);
-    }
-
-    public float RotationSmoothing(float direction)
-    {
-        var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, direction, ref _currentVelocity, _smoothTime);
-        return angle;
-    }
 
     public void GroundCheck()
     {
@@ -84,7 +83,6 @@ public class PlayerController : MonoBehaviour
         {
             // If grounded, Run the jump action
             _isGrounded = true;
-            AddJumpForce();
         }
         else
         {
@@ -92,12 +90,6 @@ public class PlayerController : MonoBehaviour
             _isGrounded = false;
 
         }
-    }
-
-    public void WalkSpeed()
-    {
-        Vector3 movement = new Vector3(_direction.x, 0f, _direction.y);
-        _rb.AddForce(movement * _speed);
     }
 
     public void AddJumpForce()
