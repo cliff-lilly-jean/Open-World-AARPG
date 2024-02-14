@@ -17,9 +17,10 @@ public class PlayerController : MonoBehaviour
     private float _currentVelocity;
     private float _groundCheck;
     private float _bufferDistance = 0.01f;
-    private float _gravity = -9.81f;
+    private float _gravityScale = 5;
+    private float _fallGravityScale = 20;
     private float _velocity;
-    private bool _isGrounded = true;
+    private bool _isGrounded;
 
     public Transform cam;
 
@@ -33,6 +34,8 @@ public class PlayerController : MonoBehaviour
     {
 
         if (_inputVector.sqrMagnitude == 0) return;
+
+        // Move
         ApplyMovement();
 
     }
@@ -64,37 +67,46 @@ public class PlayerController : MonoBehaviour
     public void Jump(InputAction.CallbackContext context)
     {
         if (!context.started) return;
-        GroundCheck();
+        // If the player is on the ground:
+        // -- Reset player gravity or weight
+        // -- Move the player vertically
+        // ---- If the player velocity is greater than 70% of jump height
+        // ------ Add some weight or gravity to the player
+
+
+
+        _isGrounded = GroundCheck();
+
         if (_isGrounded)
         {
-            AddJumpForce();
+            ApplyJumpForce();
         }
     }
 
 
-    public void GroundCheck()
+    public bool GroundCheck()
     {
         // Create a capsule buffer
         _groundCheck = (GetComponent<CapsuleCollider>().height / 2) + _bufferDistance;
 
         //Perform a raycast down
         RaycastHit hit;
+
         if (Physics.Raycast(transform.position, -transform.up, out hit, _groundCheck))
         {
             // If grounded, Run the jump action
-            _isGrounded = true;
+            return _isGrounded = true;
         }
         else
         {
-            // ray didn't hit ground
-            _isGrounded = false;
-
+            // Don't allow Jump action
+            return _isGrounded = false;
         }
     }
 
-    public void AddJumpForce()
+    public void ApplyJumpForce()
     {
-        _rb.AddForce(transform.up * _jumpStrength, ForceMode.Impulse);
+        _rb.AddForce(Vector3.up * _jumpStrength, ForceMode.Impulse);
     }
 
 
