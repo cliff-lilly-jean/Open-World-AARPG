@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,11 +12,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _smoothTime = 0.05f;
     [SerializeField] private float _jumpStrength;
-    [SerializeField] private float _bodyMass;
+    [SerializeField] private float _gravityMultiplier = 3.0f;
 
     private float _currentVelocity;
     private float _groundCheck;
     private float _bufferDistance = 0.01f;
+    private float _gravity = -9.81f;
+    private float _velocity;
     private bool _isGrounded = true;
 
 
@@ -87,6 +90,7 @@ public class PlayerController : MonoBehaviour
         {
             // ray didn't hit ground
             _isGrounded = false;
+
         }
     }
 
@@ -99,13 +103,7 @@ public class PlayerController : MonoBehaviour
     public void AddJumpForce()
     {
         _rb.AddForce(transform.up * _jumpStrength, ForceMode.Impulse);
-        /*
-            ***Less Floaty Jump***
-            - Determine if player is in the air
-
-            - Add gravity/mass to player
-            - Determine if player is on the ground
-            - reset gravity/mass
-        */
     }
+
+
 }
