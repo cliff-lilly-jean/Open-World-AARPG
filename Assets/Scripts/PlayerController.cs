@@ -5,17 +5,19 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private Vector2 _inputVector;
-    private Rigidbody _rb;
     private Vector3 _direction;
+    private Rigidbody _rb;
 
     [SerializeField] private float _speed;
     [SerializeField] private float _smoothTime = 0.05f;
-    [SerializeField] public float _jumpStrength;
+    [SerializeField] private float _jumpStrength;
+    [SerializeField] private float _bodyMass;
 
     private float _currentVelocity;
     private float _groundCheck;
     private float _bufferDistance = 0.01f;
-    private bool _isGrounded = false;
+    private bool _isGrounded = true;
+
 
     private void Awake()
     {
@@ -100,6 +102,7 @@ public class PlayerController : MonoBehaviour
         /*
             ***Less Floaty Jump***
             - Determine if player is in the air
+
             - Add gravity/mass to player
             - Determine if player is on the ground
             - reset gravity/mass
