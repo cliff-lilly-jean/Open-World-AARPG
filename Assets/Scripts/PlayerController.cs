@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     private float _currentVelocity;
     private float _groundCheck;
-    private float _bufferDistance = 0.01f;
+    private float _bufferDistance = 0.1f;
     private float _gravityScale = 5;
     private float _fallGravityScale = 20;
     private float _velocity;
@@ -30,6 +30,11 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
+    private void Update()
+    {
+        GroundCheck();
+    }
+
     private void FixedUpdate()
     {
 
@@ -37,7 +42,6 @@ public class PlayerController : MonoBehaviour
 
         // Move
         ApplyMovement();
-
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -74,12 +78,10 @@ public class PlayerController : MonoBehaviour
         // ------ Add some weight or gravity to the player
 
 
-
-        _isGrounded = GroundCheck();
-
         if (_isGrounded)
         {
             ApplyJumpForce();
+            // ApplyGravity();
         }
     }
 
@@ -95,11 +97,13 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(transform.position, -transform.up, out hit, _groundCheck))
         {
             // If grounded, Run the jump action
+            Debug.Log("On ground");
             return _isGrounded = true;
         }
         else
         {
             // Don't allow Jump action
+            Debug.Log("In air");
             return _isGrounded = false;
         }
     }
@@ -108,6 +112,4 @@ public class PlayerController : MonoBehaviour
     {
         _rb.AddForce(Vector3.up * _jumpStrength, ForceMode.Impulse);
     }
-
-
 }
