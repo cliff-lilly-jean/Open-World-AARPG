@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void ApplyMovement()
+    private void ApplyMovement()
     {
         // Get direction angles
         var lookDirection = Mathf.Atan2(_direction.x, _direction.y) * Mathf.Rad2Deg + cam.eulerAngles.y;
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
         _rb.AddForce(moveDirection.normalized * _speed);
     }
 
-    public void Jump(InputAction.CallbackContext context)
+    private void Jump(InputAction.CallbackContext context)
     {
         if (!context.started) return;
         // If the player is on the ground:
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public bool GroundCheck()
+    private bool GroundCheck()
     {
         // Create a capsule buffer
         _groundCheck = (GetComponent<CapsuleCollider>().height / 2) + _bufferDistance;
@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void ApplyJumpForce()
+    private void ApplyJumpForce()
     {
         _rb.AddForce(Vector3.up * _jumpStrength, ForceMode.Impulse);
     }
