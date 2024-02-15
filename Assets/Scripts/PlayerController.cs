@@ -80,8 +80,15 @@ public class PlayerController : MonoBehaviour
 
         if (_isGrounded)
         {
+            // ResetGravity();
             ApplyJumpForce();
-            // ApplyGravity();
+            // CalculateVelocity();
+            if (_velocity > 0.7f)
+            {
+                // ApplyGravity();
+                // CalculateVelocity();
+            }
+            GroundCheck();
         }
     }
 
