@@ -12,13 +12,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _smoothTime = 0.05f;
     [SerializeField] private float _jumpStrength;
-    [SerializeField] private float _gravityMultiplier = 3.0f;
 
     private float _currentVelocity;
     private float _groundCheck;
     private float _bufferDistance = 0.1f;
 
     private bool _isGrounded;
+    private bool _jumpStarted;
+
 
     public Transform cam;
 
@@ -32,6 +33,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         GroundCheck();
+
+
     }
 
     private void FixedUpdate()
@@ -42,6 +45,11 @@ public class PlayerController : MonoBehaviour
 
         // Move
         ApplyMovement();
+
+        if (_rb.transform.position.y > 2.3f)
+        {
+            _rb.AddForce(Vector3.down * 4.4f, ForceMode.Impulse);
+        }
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -70,21 +78,12 @@ public class PlayerController : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext context)
     {
-        if (!context.started) return;
-        // If the player is on the ground:
-        // -- Reset player gravity or weight
-        // -- Move the player vertically
-        // ---- If the player velocity is greater than 70% of jump height
-        // ------ Add some weight or gravity to the player
 
+        if (!context.started) return;
 
         if (_isGrounded)
         {
-            // ResetGravity();
             ApplyJumpForce();
-            // CalculateVelocity();
-
-            GroundCheck();
         }
     }
 
@@ -100,13 +99,11 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(transform.position, -transform.up, out hit, _groundCheck))
         {
             // If grounded, Run the jump action
-            Debug.Log("On ground");
             return _isGrounded = true;
         }
         else
         {
             // Don't allow Jump action
-            Debug.Log("In air");
             return _isGrounded = false;
         }
     }
