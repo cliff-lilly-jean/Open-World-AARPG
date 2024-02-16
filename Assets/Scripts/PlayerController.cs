@@ -1,12 +1,12 @@
-using System.Security.Cryptography.X509Certificates;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
     private Vector2 _inputVector;
     private Vector3 _direction;
+    private Vector3 _velocity;
     private Rigidbody _rb;
 
     [SerializeField] private float _speed;
@@ -17,9 +17,7 @@ public class PlayerController : MonoBehaviour
     private float _currentVelocity;
     private float _groundCheck;
     private float _bufferDistance = 0.1f;
-    private float _gravityScale = 5;
-    private float _fallGravityScale = 20;
-    private float _velocity;
+
     private bool _isGrounded;
 
     public Transform cam;
@@ -28,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        _velocity = _rb.velocity;
     }
 
     private void Update()
@@ -37,6 +36,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+
 
         if (_inputVector.sqrMagnitude == 0) return;
 
@@ -83,11 +83,7 @@ public class PlayerController : MonoBehaviour
             // ResetGravity();
             ApplyJumpForce();
             // CalculateVelocity();
-            if (_velocity > 0.7f)
-            {
-                // ApplyGravity();
-                // CalculateVelocity();
-            }
+
             GroundCheck();
         }
     }
@@ -95,7 +91,7 @@ public class PlayerController : MonoBehaviour
 
     private bool GroundCheck()
     {
-        // Create a capsule buffer
+        // Create a capsule buffer from the ground
         _groundCheck = (GetComponent<CapsuleCollider>().height / 2) + _bufferDistance;
 
         //Perform a raycast down
@@ -118,5 +114,12 @@ public class PlayerController : MonoBehaviour
     private void ApplyJumpForce()
     {
         _rb.AddForce(Vector3.up * _jumpStrength, ForceMode.Impulse);
+
+        if (_velocity.y > 0.1f)
+        {
+            Debug.Log(_velocity.y);
+            // ApplyGravity();
+            // CalculateVelocity();
+        }
     }
 }
