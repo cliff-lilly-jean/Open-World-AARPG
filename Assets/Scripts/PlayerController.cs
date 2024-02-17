@@ -32,9 +32,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        GroundCheck();
-
-
+        IsGrounded();
     }
 
     private void FixedUpdate()
@@ -45,11 +43,10 @@ public class PlayerController : MonoBehaviour
 
         // Move
         ApplyMovement();
+        var jump += => _ Jum;
 
-        if (_rb.transform.position.y > 2.3f)
-        {
-            _rb.AddForce(Vector3.down * 4.4f, ForceMode.Impulse);
-        }
+
+
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -79,16 +76,23 @@ public class PlayerController : MonoBehaviour
     private void Jump(InputAction.CallbackContext context)
     {
 
-        if (!context.started) return;
-
-        if (_isGrounded)
+        // if (!context.started) return;
+        Debug.Log(context);
+        Debug.Log(_rb.transform.position.y);
+        if (IsGrounded())
         {
             ApplyJumpForce();
         }
+
+        // if (_rb.transform.position.y >= 3f && !IsGrounded())
+        // {
+
+        //     ApplyDownForce();
+        // }
     }
 
 
-    private bool GroundCheck()
+    private bool IsGrounded()
     {
         // Create a capsule buffer from the ground
         _groundCheck = (GetComponent<CapsuleCollider>().height / 2) + _bufferDistance;
@@ -112,11 +116,17 @@ public class PlayerController : MonoBehaviour
     {
         _rb.AddForce(Vector3.up * _jumpStrength, ForceMode.Impulse);
 
-        if (_velocity.y > 0.1f)
+    }
+
+    private void ApplyDownForce()
+    {
+        _rb.AddForce(Vector3.down * 6.4f, ForceMode.Impulse);
+        Debug.Log("Downforce applied");
+
+        if (_rb.transform.position.y <= 0.1f)
         {
-            Debug.Log(_velocity.y);
-            // ApplyGravity();
-            // CalculateVelocity();
+            _isGrounded = true;
+            Debug.Log("Grounded");
         }
     }
 }
