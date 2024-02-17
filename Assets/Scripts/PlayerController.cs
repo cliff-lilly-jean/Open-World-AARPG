@@ -8,11 +8,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rb;
 
     [SerializeField] private float _speed;
-    [SerializeField] private float _smoothTime = 0.05f;
     [SerializeField] private float _jumpStrength;
+    [SerializeField] private float _gravity;
+    [SerializeField] private float _smoothTime = 0.05f;
+    [SerializeField] private float _maxJumpHeight;
 
     private float _currentVelocity;
     private float _groundCheck;
+
     private float _bufferDistance = 0.1f;
 
     private bool _isGrounded;
@@ -30,21 +33,36 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        // Ground check
         GroundCheck();
+
+        // Jump
+        if (_jumpStarted && _isGrounded)
+        {
+            ApplyJump();
+        }
+
+        // Gravity
+        if (!_isGrounded && !_jumpStarted)
+        {
+            Debug.Log("Pre gravity");
+            if (_rb.transform.position.y > 3f)
+            {
+                Debug.Log("Gravity");
+                ApplyGravity();
+            }
+            Debug.Log("Post Gravity");
+        }
+
+
     }
 
     private void FixedUpdate()
     {
-
-
         if (_direction.sqrMagnitude == 0) return;
 
         // Move
         ApplyMovement();
-
-        // Jump
-
-
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -68,23 +86,15 @@ public class PlayerController : MonoBehaviour
         _rb.AddForce(moveDirection.normalized * _speed);
     }
 
+    private void ApplyJump()
+    {
+        Debug.Log("Jump pressed");
+        _rb.AddForce(Vector3.up * _jumpStrength, ForceMode.Impulse);
+    }
+
     private void Jump(InputAction.CallbackContext context)
     {
         _jumpStarted = context.performed;
-
-        GroundCheck();
-        Debug.Log(_isGrounded);
-        if (_jumpStarted && _isGrounded)
-        {
-            _rb.AddForce(Vector3.up * _jumpStrength, ForceMode.Impulse);
-        }
-        /* Downward force Algorithm */
-        // Create a variable _bodyMass, to hold the rigidbody mass value;
-        // If not on the ground:
-        // _bodyMass = 30f;
-        // Check if on the ground
-        // If on the ground:
-        // _bodyMass = default
     }
 
 
@@ -107,4 +117,13 @@ public class PlayerController : MonoBehaviour
             _isGrounded = false;
         }
     }
+
+    private void ApplyGravity()
+    {
+        Debug.Log("Gravity applied");
+        _rb.AddForce(Vector3.down * _jumpStrength, ForceMode.Impulse);
+    }
 }
+
+
+
