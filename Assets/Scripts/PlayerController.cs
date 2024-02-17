@@ -4,9 +4,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    private Vector2 _inputVector;
-    private Vector3 _direction;
-    private Vector3 _velocity;
+    private Vector2 _direction;
     private Rigidbody _rb;
 
     [SerializeField] private float _speed;
@@ -24,10 +22,10 @@ public class PlayerController : MonoBehaviour
     public Transform cam;
 
 
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        _velocity = _rb.velocity;
     }
 
     private void Update()
@@ -39,12 +37,11 @@ public class PlayerController : MonoBehaviour
     {
 
 
-        if (_inputVector.sqrMagnitude == 0) return;
+        if (_direction.sqrMagnitude == 0) return;
 
         // Move
         ApplyMovement();
-        var jump += => _ Jum;
-
+        // Jump
 
 
     }
@@ -52,10 +49,7 @@ public class PlayerController : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         // Get input
-        _inputVector = context.ReadValue<Vector2>();
-
-        // Convert input variables
-        _direction = _inputVector;
+        _direction = context.ReadValue<Vector2>();
 
     }
 
@@ -75,24 +69,23 @@ public class PlayerController : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext context)
     {
+        _jumpStarted = context.performed;
 
-        // if (!context.started) return;
-        Debug.Log(context);
-        Debug.Log(_rb.transform.position.y);
-        if (IsGrounded())
+        if (_jumpStarted && _isGrounded)
         {
-            ApplyJumpForce();
+            _rb.AddForce(Vector3.up * _jumpStrength, ForceMode.Impulse);
         }
-
-        // if (_rb.transform.position.y >= 3f && !IsGrounded())
-        // {
-
-        //     ApplyDownForce();
-        // }
+        /* Downward force Algorithm */
+        // Create a variable _bodyMass, to hold the rigidbody mass value;
+        // If not on the ground:
+        // _bodyMass = 30f;
+        // Check if on the ground
+        // If on the ground:
+        // _bodyMass = default
     }
 
 
-    private bool IsGrounded()
+    private void IsGrounded()
     {
         // Create a capsule buffer from the ground
         _groundCheck = (GetComponent<CapsuleCollider>().height / 2) + _bufferDistance;
@@ -103,30 +96,12 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(transform.position, -transform.up, out hit, _groundCheck))
         {
             // If grounded, Run the jump action
-            return _isGrounded = true;
+            _isGrounded = true;
         }
         else
         {
             // Don't allow Jump action
-            return _isGrounded = false;
-        }
-    }
-
-    private void ApplyJumpForce()
-    {
-        _rb.AddForce(Vector3.up * _jumpStrength, ForceMode.Impulse);
-
-    }
-
-    private void ApplyDownForce()
-    {
-        _rb.AddForce(Vector3.down * 6.4f, ForceMode.Impulse);
-        Debug.Log("Downforce applied");
-
-        if (_rb.transform.position.y <= 0.1f)
-        {
-            _isGrounded = true;
-            Debug.Log("Grounded");
+            _isGrounded = false;
         }
     }
 }
