@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        IsGrounded();
+        GroundCheck();
     }
 
     private void FixedUpdate()
@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
         // Move
         ApplyMovement();
+
         // Jump
 
 
@@ -71,6 +72,8 @@ public class PlayerController : MonoBehaviour
     {
         _jumpStarted = context.performed;
 
+        GroundCheck();
+        Debug.Log(_isGrounded);
         if (_jumpStarted && _isGrounded)
         {
             _rb.AddForce(Vector3.up * _jumpStrength, ForceMode.Impulse);
@@ -85,7 +88,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void IsGrounded()
+    private void GroundCheck()
     {
         // Create a capsule buffer from the ground
         _groundCheck = (GetComponent<CapsuleCollider>().height / 2) + _bufferDistance;
