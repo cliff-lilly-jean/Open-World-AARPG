@@ -38,17 +38,17 @@ public class PlayerController : MonoBehaviour
         // Jump
 
 
+
         // Gravity
-        if (!_isGrounded && !_jumpStarted)
-        {
-            Debug.Log("Pre gravity");
-            if (_rb.transform.position.y > 3f)
-            {
-                Debug.Log("Gravity");
-                ApplyGravity();
-            }
-            Debug.Log("Post Gravity");
-        }
+        // if (!_isGrounded && !_jumpStarted)
+        // {
+        //     Debug.Log("Pre gravity");
+
+        //     Debug.Log("Gravity");
+        //     ApplyGravity();
+
+        //     Debug.Log("Post Gravity");
+        // }
 
 
     }
@@ -59,6 +59,9 @@ public class PlayerController : MonoBehaviour
 
         // Move
         ApplyMovement();
+
+        ApplyJump();
+        ApplyGravity();
     }
 
     #region Move
@@ -89,12 +92,29 @@ public class PlayerController : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext context)
     {
-        var g = context.phase;
-        Debug.Log(g);
-        if (_jumpStarted && _isGrounded)
+        var a = context.phase;
+        var b = context.startTime;
+        var c = context.performed;
+        var d = context.canceled;
+        var e = context.started;
+
+        if (context.started)
         {
-            ApplyJump();
+            Debug.Log("Jump pressed");
+            _rb.AddForce(Vector3.up * _jumpStrength, ForceMode.Impulse);
         }
+        if (context.performed)
+        {
+            if ()
+                Debug.Log("Gravity applied");
+            _rb.AddForce(Vector3.down * _jumpStrength, ForceMode.Impulse);
+        }
+
+
+        // if (_jumpStarted && _isGrounded)
+        // {
+        //     ApplyJump();
+        // }
 
     }
 
