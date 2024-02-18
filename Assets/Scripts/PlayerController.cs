@@ -37,10 +37,7 @@ public class PlayerController : MonoBehaviour
         GroundCheck();
 
         // Jump
-        if (_jumpStarted && _isGrounded)
-        {
-            ApplyJump();
-        }
+
 
         // Gravity
         if (!_isGrounded && !_jumpStarted)
@@ -65,6 +62,7 @@ public class PlayerController : MonoBehaviour
         ApplyMovement();
     }
 
+    #region Move
     public void Move(InputAction.CallbackContext context)
     {
         // Get input
@@ -86,17 +84,26 @@ public class PlayerController : MonoBehaviour
         _rb.AddForce(moveDirection.normalized * _speed);
     }
 
+    #endregion Move
+
+    #region Jump
+
+    private void Jump(InputAction.CallbackContext context)
+    {
+        var g = context.phase;
+        Debug.Log(g);
+        if (_jumpStarted && _isGrounded)
+        {
+            ApplyJump();
+        }
+
+    }
+
     private void ApplyJump()
     {
         Debug.Log("Jump pressed");
         _rb.AddForce(Vector3.up * _jumpStrength, ForceMode.Impulse);
     }
-
-    private void Jump(InputAction.CallbackContext context)
-    {
-        _jumpStarted = context.performed;
-    }
-
 
     private void GroundCheck()
     {
@@ -123,6 +130,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Gravity applied");
         _rb.AddForce(Vector3.down * _jumpStrength, ForceMode.Impulse);
     }
+    #endregion Jump
 }
 
 
