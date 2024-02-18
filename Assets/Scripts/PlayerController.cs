@@ -22,8 +22,7 @@ public class PlayerController : MonoBehaviour
     private bool _jumpStarted;
 
 
-    public Transform cam;
-
+    public Transform cameraTransform;
 
 
     private void Awake()
@@ -73,7 +72,7 @@ public class PlayerController : MonoBehaviour
     private void ApplyMovement()
     {
         // Get direction angles
-        var lookDirection = Mathf.Atan2(_direction.x, _direction.y) * Mathf.Rad2Deg + cam.eulerAngles.y;
+        var lookDirection = Mathf.Atan2(_direction.x, _direction.y) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
         var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, lookDirection, ref _currentVelocity, _smoothTime);
 
         // Rotate the transform in the lookDirection
