@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // _gravityFOrce.y += _gravity * Time.deltaTime;
+
 
     }
 
@@ -41,7 +41,6 @@ public class PlayerController : MonoBehaviour
         if (IsGrounded())
         {
             ApplyMovement();
-            ApplyJump();
         }
     }
 
@@ -64,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
         // Move the player in the direction of the rotation
         Vector3 moveDirection = Quaternion.Euler(0f, lookDirection, 0f) * Vector3.forward;
-        _rb.AddForce(moveDirection.normalized * _speed * Time.deltaTime);
+        _rb.AddForce(moveDirection.normalized * _speed);
     }
 
     #endregion Move
@@ -74,19 +73,18 @@ public class PlayerController : MonoBehaviour
     public void Jump(InputAction.CallbackContext context)
     {
 
-        var _jump = context.ReadValueAsButton();
-        Debug.Log(_jump);
-        // if (context.performed)
-        // {
-        //     ApplyJump();
-        // }
+        if (context.performed && IsGrounded())
+        {
+            ApplyJump();
+
+        }
 
     }
 
     public void ApplyJump()
     {
         Debug.Log("Jump pressed");
-        _rb.AddForce(Vector3.up * _jumpStrength, ForceMode.Impulse);
+        _rb.AddForce(Vector3.up * _jumpStrength * _gravity * Time.deltaTime, ForceMode.Impulse);
     }
 
     private bool IsGrounded()

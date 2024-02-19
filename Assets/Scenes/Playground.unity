@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -856,7 +856,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 729396386}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.102371395, y: 0.8897872, z: -0.37070388, w: 0.24571836}
+  m_LocalRotation: {x: 0.10237139, y: 0.8897872, z: -0.3707039, w: 0.24571836}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1425,7 +1425,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398518698}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11122955, y: 0.87573415, z: -0.40278074, w: 0.24183758}
+  m_LocalRotation: {x: 0.111229524, y: 0.87573415, z: -0.40278077, w: 0.2418375}
   m_LocalPosition: {x: 0.41192436, y: 15, z: 10.299422}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1616,7 +1616,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1505783002}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11122954, y: 0.87573415, z: -0.4027807, w: 0.24183758}
+  m_LocalRotation: {x: 0.111229524, y: 0.87573415, z: -0.40278074, w: 0.24183752}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2148,7 +2148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2143959547}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.106812246, y: 0.8829157, z: -0.38678494, w: 0.24382076}
+  m_LocalRotation: {x: 0.10681224, y: 0.8829157, z: -0.3867849, w: 0.24382079}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2194,6 +2194,11 @@ PrefabInstance:
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 1398518701}
+    - target: {fileID: 1188440861799801159, guid: 1d72a11a80ec58c44b77314be40c3358,
+        type: 3}
+      propertyPath: _playerRotationSmoothTime
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 1917682830543227964, guid: 1d72a11a80ec58c44b77314be40c3358,
         type: 3}
       propertyPath: m_LocalPosition.x
