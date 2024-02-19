@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private float _bufferDistance = 0.1f;
 
     private bool _isGrounded;
+    private bool _jump;
 
 
     public Transform cameraTransform;
@@ -32,16 +33,19 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
 
-
     }
 
     private void FixedUpdate()
     {
         if (_direction.sqrMagnitude == 0) return;
-        if (IsGrounded())
-        {
-            ApplyMovement();
-        }
+        ApplyMovement();
+
+
+
+        // if (!IsGrounded() && _rb.velocity.y >= 1.5f)
+        // {
+        //     ApplyGravity();
+        // }
     }
 
     #region Move
@@ -72,11 +76,11 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-
-        if (context.performed && IsGrounded())
+        _jump = context.performed;
+        Debug.Log(_jump);
+        if (_jump && IsGrounded())
         {
             ApplyJump();
-
         }
 
     }
@@ -84,7 +88,7 @@ public class PlayerController : MonoBehaviour
     public void ApplyJump()
     {
         Debug.Log("Jump pressed");
-        _rb.AddForce(Vector3.up * _jumpStrength * _gravity * Time.deltaTime, ForceMode.Impulse);
+        _rb.AddForce(Vector3.up * _jumpStrength, ForceMode.Force);
     }
 
     private bool IsGrounded()
@@ -110,7 +114,7 @@ public class PlayerController : MonoBehaviour
     private void ApplyGravity()
     {
         Debug.Log("Gravity applied");
-        _rb.AddForce(Vector3.down * _jumpStrength, ForceMode.Impulse);
+        _rb.AddForce(Vector3.down, ForceMode.Force);
     }
     #endregion Jump
 }
