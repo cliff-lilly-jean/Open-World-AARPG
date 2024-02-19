@@ -5,13 +5,13 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private Vector2 _direction;
+    private Vector3 _gravityFOrce;
     private Rigidbody _rb;
 
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpStrength;
-    [SerializeField] private float _gravity;
-    [SerializeField] private float _smoothTime = 0.05f;
-    [SerializeField] private float _maxJumpHeight;
+    [SerializeField] public float _gravity = -20f;
+    [SerializeField] private float _playerRotationSmoothTime = 0.05f;
 
     private float _currentVelocity;
     private float _groundCheck;
@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     private float _bufferDistance = 0.1f;
 
     private bool _isGrounded;
-    private bool _jumpStarted;
 
 
     public Transform cameraTransform;
@@ -32,36 +31,18 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // Ground check
-        GroundCheck();
-
-        // Jump
-
-
-
-        // Gravity
-        // if (!_isGrounded && !_jumpStarted)
-        // {
-        //     Debug.Log("Pre gravity");
-
-        //     Debug.Log("Gravity");
-        //     ApplyGravity();
-
-        //     Debug.Log("Post Gravity");
-        // }
-
+        // _gravityFOrce.y += _gravity * Time.deltaTime;
 
     }
 
     private void FixedUpdate()
     {
         if (_direction.sqrMagnitude == 0) return;
-
-        // Move
-        ApplyMovement();
-
-        ApplyJump();
-        ApplyGravity();
+        if (IsGrounded())
+        {
+            ApplyMovement();
+            ApplyJump();
+        }
     }
 
     #region Move
@@ -76,55 +57,39 @@ public class PlayerController : MonoBehaviour
     {
         // Get direction angles
         var lookDirection = Mathf.Atan2(_direction.x, _direction.y) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
-        var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, lookDirection, ref _currentVelocity, _smoothTime);
+        var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, lookDirection, ref _currentVelocity, _playerRotationSmoothTime);
 
         // Rotate the transform in the lookDirection
         transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
         // Move the player in the direction of the rotation
         Vector3 moveDirection = Quaternion.Euler(0f, lookDirection, 0f) * Vector3.forward;
-        _rb.AddForce(moveDirection.normalized * _speed);
+        _rb.AddForce(moveDirection.normalized * _speed * Time.deltaTime);
     }
 
     #endregion Move
 
     #region Jump
 
-    private void Jump(InputAction.CallbackContext context)
+    public void Jump(InputAction.CallbackContext context)
     {
-        var a = context.phase;
-        var b = context.startTime;
-        var c = context.performed;
-        var d = context.canceled;
-        var e = context.started;
 
-        if (context.started)
-        {
-            Debug.Log("Jump pressed");
-            _rb.AddForce(Vector3.up * _jumpStrength, ForceMode.Impulse);
-        }
-        if (context.performed)
-        {
-            if ()
-                Debug.Log("Gravity applied");
-            _rb.AddForce(Vector3.down * _jumpStrength, ForceMode.Impulse);
-        }
-
-
-        // if (_jumpStarted && _isGrounded)
+        var _jump = context.ReadValueAsButton();
+        Debug.Log(_jump);
+        // if (context.performed)
         // {
         //     ApplyJump();
         // }
 
     }
 
-    private void ApplyJump()
+    public void ApplyJump()
     {
         Debug.Log("Jump pressed");
         _rb.AddForce(Vector3.up * _jumpStrength, ForceMode.Impulse);
     }
 
-    private void GroundCheck()
+    private bool IsGrounded()
     {
         // Create a capsule buffer from the ground
         _groundCheck = (GetComponent<CapsuleCollider>().height / 2) + _bufferDistance;
@@ -132,15 +97,15 @@ public class PlayerController : MonoBehaviour
         //Perform a raycast down
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, -transform.up, out hit, _groundCheck))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, _groundCheck))
         {
             // If grounded, Run the jump action
-            _isGrounded = true;
+            return _isGrounded = true;
         }
         else
         {
             // Don't allow Jump action
-            _isGrounded = false;
+            return _isGrounded = false;
         }
     }
 
