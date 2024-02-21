@@ -39,12 +39,11 @@ public class HumanoidLandInput : MonoBehaviour
     private void SetMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        moveIsPressed = true;
+        moveIsPressed = !(moveInput == Vector2.zero);
     }
 
     private void SetLook(InputAction.CallbackContext context)
     {
         lookInput = context.ReadValue<Vector2>();
-        moveIsPressed = false;
     }
 }
