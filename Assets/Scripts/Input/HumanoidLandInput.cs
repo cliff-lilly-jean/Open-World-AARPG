@@ -6,9 +6,9 @@ public class HumanoidLandInput : MonoBehaviour
 
     public Vector2 moveInput { get; private set; } = Vector2.zero;
     public Vector2 lookInput { get; private set; } = Vector2.zero;
+    public bool moveIsPressed = false;
 
     Controls _controls = null;
-
 
     private void OnEnable()
     {
@@ -39,10 +39,12 @@ public class HumanoidLandInput : MonoBehaviour
     private void SetMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+        moveIsPressed = true;
     }
 
     private void SetLook(InputAction.CallbackContext context)
     {
         lookInput = context.ReadValue<Vector2>();
+        moveIsPressed = false;
     }
 }
