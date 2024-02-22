@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
         controls = new GameControls();
         controls.Gameplay.Jump.performed += _ => Jump();
         controls.Gameplay.Move.performed += _ => Move();
+        controls.Gameplay.Sprint.performed += _ => Move();
     }
 
     private void Update()
@@ -115,6 +116,10 @@ public class PlayerController : MonoBehaviour
         _rb.AddForce(Vector3.down * _gravityForce * Time.deltaTime, ForceMode.VelocityChange);
     }
     #endregion Jump
+
+    #region Sprint
+
+    #endregion
 
     public void OnEnable()
     {

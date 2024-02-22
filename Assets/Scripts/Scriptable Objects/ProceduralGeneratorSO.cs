@@ -6,8 +6,10 @@ using UnityEngine;
 public class ProceduralGeneratorSO : ScriptableObject
 {
     public GameObject prefab;
-    public int numberOfPrefabInstances;
-    public float generationAreaSize;
     public Transform parentContainer;
+
+    public int numberOfPrefabInstances;
+
+    public float generationAreaSize;
     public float absoluteGroundLevel;
 }
