@@ -44,14 +44,10 @@ public class PlayerController : MonoBehaviour
         // Gravity
         if (!_isGrounded && !_jumpStarted)
         {
-            if (_rb.transform.position.y >= _maxJumpHeight)
+            if (_rb.velocity.y < 0.1)
             {
+                Debug.Log("Down");
                 ApplyGravity();
-            }
-
-            if (_rb.transform.position.y < 1.2)
-            {
-                Debug.Log("Force stop");
             }
         }
     }
