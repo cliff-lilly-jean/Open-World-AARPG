@@ -228,8 +228,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 2500
-  _jumpStrength: 500
+  _jumpStrength: 2500
   _smoothTime: 0.2
+  _maxJumpHeight: 4
+  _gravityForce: 250
   cam: {fileID: 0}
 --- !u!54 &6112062648485250188
 Rigidbody:

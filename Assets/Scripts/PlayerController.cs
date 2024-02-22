@@ -48,6 +48,11 @@ public class PlayerController : MonoBehaviour
             {
                 ApplyGravity();
             }
+
+            if (_rb.transform.position.y < 1.2)
+            {
+                Debug.Log("Force stop");
+            }
         }
     }
 
@@ -61,6 +66,8 @@ public class PlayerController : MonoBehaviour
     #region Move
     public void Move()
     {
+
+        // Get input
         _direction = controls.Gameplay.Move.ReadValue<Vector2>();
 
         // Get direction angles
