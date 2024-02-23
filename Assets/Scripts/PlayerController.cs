@@ -12,16 +12,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpStrength;
     [SerializeField] private float _smoothTime = 0.05f;
-    [SerializeField] private float _maxJumpHeight = 4f;
     [SerializeField] private float _gravityForce = 6f;
 
     private float _currentVelocity;
     private float _groundCheck;
+    // private float _defaultSpeed;
+    private float _force = 100;
 
     private float _bufferDistance = 0.1f;
 
     private bool _isGrounded;
-    private bool _jumpStarted;
+    private bool _isJumping;
 
 
     public Transform cam;
@@ -34,7 +35,6 @@ public class PlayerController : MonoBehaviour
         controls = new GameControls();
         controls.Gameplay.Jump.performed += _ => Jump();
         controls.Gameplay.Move.performed += _ => Move();
-        controls.Gameplay.Sprint.performed += _ => Move();
     }
 
     private void Update()
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
         GroundCheck();
 
         // Gravity
-        if (!_isGrounded && !_jumpStarted)
+        if (!_isGrounded && !_isJumping)
         {
             if (_rb.velocity.y < 0.1)
             {
@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
 
         // Move the player in the direction of the rotation
         Vector3 moveDirection = Quaternion.Euler(0f, lookDirection, 0f) * Vector3.forward;
-        _rb.AddForce(moveDirection.normalized * _speed * Time.deltaTime);
+        _rb.AddForce(moveDirection * _speed * _force);
 
     }
 
@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
 
-        _rb.AddForce(Vector3.up * _jumpStrength * Time.deltaTime, ForceMode.Impulse);
+        _rb.AddForce(Vector3.up * _jumpStrength * _force, ForceMode.Impulse);
 
     }
 
