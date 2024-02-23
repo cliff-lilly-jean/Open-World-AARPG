@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     private bool _isGrounded;
     private bool _isJumping;
+    private bool _isSprinting;
 
 
     public Transform cam;
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
         controls = new GameControls();
         controls.Gameplay.Jump.performed += _ => Jump();
         controls.Gameplay.Move.performed += _ => Move();
+        controls.Gameplay.Sprint.performed += ctx => Sprint(ctx); // TODO: Maybe don't sync this to the performed event, find a way to get the _isSprinting variable to toggle
     }
 
     private void Update()
@@ -51,6 +53,13 @@ public class PlayerController : MonoBehaviour
                 ApplyGravity();
             }
         }
+
+        if (!_isSprinting)
+        {
+            Debug.Log("aint sprinting");
+        }
+
+        Debug.Log(_isSprinting);
     }
 
     private void FixedUpdate()
@@ -118,7 +127,10 @@ public class PlayerController : MonoBehaviour
     #endregion Jump
 
     #region Sprint
-
+    private bool Sprint(InputAction.CallbackContext context)
+    {
+        return _isSprinting = context.performed ? true : false;
+    }
     #endregion
 
     public void OnEnable()
