@@ -117,8 +117,10 @@ GameObject:
   - component: {fileID: 5760456392674668698}
   - component: {fileID: 6391496788580096945}
   - component: {fileID: 8605781455031720564}
-  - component: {fileID: 1188440861799801159}
+  - component: {fileID: 7188065114352349442}
   - component: {fileID: 6112062648485250188}
+  - component: {fileID: -7233623613141425121}
+  - component: {fileID: -4465363939315810317}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -215,7 +217,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1188440861799801159
+--- !u!114 &7188065114352349442
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -227,12 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc455e6342027e4b8652029325b244a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 2500
-  _jumpStrength: 2500
-  _smoothTime: 0.2
-  _maxJumpHeight: 4
-  _gravityForce: 250
-  cam: {fileID: 0}
+  _rb: {fileID: 6112062648485250188}
 --- !u!54 &6112062648485250188
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -241,7 +238,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3203235454447589975}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 60
   m_Drag: 4
   m_AngularDrag: 4
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -260,3 +257,39 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!114 &-7233623613141425121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3203235454447589975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 223b74251ac0b4556a83211cda56e966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  rb: {fileID: 0}
+  controller: {fileID: 0}
+  _jumpForceMultiplier: 100
+  _jumpStrength: 0
+  _gravityForceMultiplyer: 6
+  _bufferDistance: 0.1
+--- !u!114 &-4465363939315810317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3203235454447589975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f327cc564de8f48e89d22e70e754ae22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 0}
+  _lookDirectionSmoothTime: 0.05
+  _moveSpeed: 20
+  _moveSpeedBoost: 2
+  cam: {fileID: 0}

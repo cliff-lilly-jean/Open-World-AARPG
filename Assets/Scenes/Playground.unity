@@ -2099,7 +2099,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2143959547}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.015175087, y: 0.98362005, z: -0.14915161, w: 0.10007617}
+  m_LocalRotation: {x: 0.0151750855, y: 0.98362, z: -0.14915161, w: 0.10007614}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2115,35 +2115,35 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1188440861799801159, guid: 1d72a11a80ec58c44b77314be40c3358,
+    - target: {fileID: -7233623613141425121, guid: 1d72a11a80ec58c44b77314be40c3358,
         type: 3}
-      propertyPath: cam
+      propertyPath: controller
       value: 
-      objectReference: {fileID: 1398518701}
-    - target: {fileID: 1188440861799801159, guid: 1d72a11a80ec58c44b77314be40c3358,
-        type: 3}
-      propertyPath: _speed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1188440861799801159, guid: 1d72a11a80ec58c44b77314be40c3358,
-        type: 3}
-      propertyPath: _smoothTime
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1188440861799801159, guid: 1d72a11a80ec58c44b77314be40c3358,
-        type: 3}
-      propertyPath: _speedBoost
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 1188440861799801159, guid: 1d72a11a80ec58c44b77314be40c3358,
-        type: 3}
-      propertyPath: _gravityForce
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 1188440861799801159, guid: 1d72a11a80ec58c44b77314be40c3358,
+      objectReference: {fileID: 443562061633610869}
+    - target: {fileID: -7233623613141425121, guid: 1d72a11a80ec58c44b77314be40c3358,
         type: 3}
       propertyPath: _jumpStrength
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -7233623613141425121, guid: 1d72a11a80ec58c44b77314be40c3358,
+        type: 3}
+      propertyPath: _gravityForceMultiplyer
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -4465363939315810317, guid: 1d72a11a80ec58c44b77314be40c3358,
+        type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 443562061633610869}
+    - target: {fileID: -4465363939315810317, guid: 1d72a11a80ec58c44b77314be40c3358,
+        type: 3}
+      propertyPath: lookCamera
+      value: 
+      objectReference: {fileID: 1398518701}
+    - target: {fileID: -4465363939315810317, guid: 1d72a11a80ec58c44b77314be40c3358,
+        type: 3}
+      propertyPath: _moveSpeedBoost
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 1917682830543227964, guid: 1d72a11a80ec58c44b77314be40c3358,
         type: 3}
@@ -2200,26 +2200,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6112062648485250188, guid: 1d72a11a80ec58c44b77314be40c3358,
-        type: 3}
-      propertyPath: m_Drag
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6112062648485250188, guid: 1d72a11a80ec58c44b77314be40c3358,
-        type: 3}
-      propertyPath: m_Mass
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 6112062648485250188, guid: 1d72a11a80ec58c44b77314be40c3358,
-        type: 3}
-      propertyPath: m_AngularDrag
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d72a11a80ec58c44b77314be40c3358, type: 3}
+--- !u!114 &443562061633610869 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7188065114352349442, guid: 1d72a11a80ec58c44b77314be40c3358,
+    type: 3}
+  m_PrefabInstance: {fileID: 443562061633610868}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc455e6342027e4b8652029325b244a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2206875156968508271
 PrefabInstance:
   m_ObjectHideFlags: 0
