@@ -3,7 +3,11 @@ using UnityEngine;
 public class Move : MonoBehaviour
 {
     public PlayerController controller;
+    public Stamina stamina;
+
     public MovementSystemSO movementSystem;
+    public StaminaSO staminaSO;
+
     public Transform lookCamera;
 
     private float _defaultMoveSpeed;
@@ -12,6 +16,7 @@ public class Move : MonoBehaviour
     void Start()
     {
         controller = GetComponent<PlayerController>();
+        stamina = GetComponent<Stamina>();
     }
 
     // Update is called once per frame
@@ -48,18 +53,27 @@ public class Move : MonoBehaviour
 
     public void Run()
     {
-        // return _isSprinting = context.performed ? true : false;
-        Debug.Log("Sprint");
         movementSystem.move.isSprinting = true;
         movementSystem.move.moveSpeed += movementSystem.move.moveSpeedBoost;
-        Debug.Log("Current Speed pressed: " + movementSystem.move.moveSpeed);
+
+        if (staminaSO.stamina > 0)
+        {
+            stamina.DecreaseStamina();
+        }
+        else
+        {
+            if (staminaSO.stamina < staminaSO.maxStamina)
+            {
+                stamina.IncreaseStamina();
+            }
+        }
     }
 
     public void RunCanceled()
     {
-        Debug.Log("Canceled");
         movementSystem.move.isSprinting = false;
         movementSystem.move.moveSpeed = movementSystem.move.defaultMoveSpeed;
-        Debug.Log("Current Speed not pressed: " + movementSystem.move.moveSpeed);
+
+
     }
 }
