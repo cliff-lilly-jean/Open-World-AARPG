@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
+    public MovementSystemSO movementSystem;
+
     private Vector2 _moveDirection;
     public PlayerController controller;
 
-    [SerializeField] private float _lookDirectionSmoothTime = 0.05f;
-    [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _moveSpeedBoost;
+    private float _lookDirectionSmoothTime;
+    private float _moveSpeed;
+    private float _moveSpeedBoost;
 
     private float _defaultMoveSpeed;
     private float _currentMoveVelocity;
@@ -25,7 +27,15 @@ public class Move : MonoBehaviour
     {
         controller = GetComponent<PlayerController>();
 
-        _defaultMoveSpeed = _moveSpeed;
+        _defaultMoveSpeed = movementSystem.moveSpeed;
+        _moveDirection = movementSystem.moveDirection;
+        _lookDirectionSmoothTime = movementSystem.lookDirectionSmoothTime;
+        _moveSpeed = movementSystem.moveSpeed;
+        _moveSpeedBoost = movementSystem.moveSpeedBoost;
+        _currentMoveVelocity = movementSystem.currentMoveVelocity;
+        _moveForceMultiplier = movementSystem.force;
+        _isSprinting = movementSystem.isSprinting;
+        _sprint = movementSystem.sprint;
     }
 
     // Update is called once per frame
