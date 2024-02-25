@@ -9,22 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 689de609ade7f4b9e8b48cc35ba8c7d3, type: 3}
-  m_Name: PlayerMovementSystem
+  m_Script: {fileID: 11500000, guid: 6ab75eddb5c334763b67f1e00f1e447c, type: 3}
+  m_Name: PlayerMove
   m_EditorClassIdentifier: 
-  isGrounded: 0
-  isJumping: 0
-  groundCheck: 0.1
-  jumpStrength: 20
-  gravityForceMultiplier: 105
-  bufferDistance: 0.1
   moveDirection: {x: 0, y: 0}
-  controller: {fileID: 0}
   lookDirectionSmoothTime: 0.05
   moveSpeed: 20
   moveSpeedBoost: 60
   defaultMoveSpeed: 0
-  currentMoveVelocity: 0
+  currentMoveVelocity: -1282.3623
   isSprinting: 0
   sprint: 0
-  force: 100

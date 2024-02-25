@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "Systems/Movement/Mechanics/Jump")]
 public class JumpSO : ScriptableObject
 {
     public bool isGrounded;

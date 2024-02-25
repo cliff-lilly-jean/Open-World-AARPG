@@ -6,10 +6,13 @@ public class Move : MonoBehaviour
     public MovementSystemSO movementSystem;
     public Transform lookCamera;
 
+    private float _defaultMoveSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<PlayerController>();
+        _defaultMoveSpeed = movementSystem.move.moveSpeed;
     }
 
     // Update is called once per frame
@@ -21,7 +24,7 @@ public class Move : MonoBehaviour
     private void FixedUpdate()
     {
         // Move
-        if (movementSystem.moveDirection.sqrMagnitude == 0) return;
+        if (movementSystem.move.moveDirection.sqrMagnitude == 0) return;
         Walk();
     }
 
@@ -29,18 +32,18 @@ public class Move : MonoBehaviour
     {
 
         // Get input
-        movementSystem.moveDirection = controller.controls.Gameplay.Move.ReadValue<Vector2>();
+        movementSystem.move.moveDirection = controller.controls.Gameplay.Move.ReadValue<Vector2>();
 
         // Get direction angles
-        var lookDirection = Mathf.Atan2(movementSystem.moveDirection.x, movementSystem.moveDirection.y) * Mathf.Rad2Deg + lookCamera.eulerAngles.y;
-        var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, lookDirection, ref movementSystem.currentMoveVelocity, movementSystem.lookDirectionSmoothTime);
+        var lookDirection = Mathf.Atan2(movementSystem.move.moveDirection.x, movementSystem.move.moveDirection.y) * Mathf.Rad2Deg + lookCamera.eulerAngles.y;
+        var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, lookDirection, ref movementSystem.move.currentMoveVelocity, movementSystem.move.lookDirectionSmoothTime);
 
         // Rotate the transform in the lookDirection
         transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
         // Move the player in the direction of the rotation
         Vector3 moveDirection = Quaternion.Euler(0f, lookDirection, 0f) * Vector3.forward;
-        controller._rb.AddForce(moveDirection * movementSystem.moveSpeed * movementSystem.force);
+        controller._rb.AddForce(moveDirection * movementSystem.move.moveSpeed * movementSystem.force);
 
     }
 
@@ -48,16 +51,16 @@ public class Move : MonoBehaviour
     {
         // return _isSprinting = context.performed ? true : false;
         Debug.Log("Sprint");
-        movementSystem.isSprinting = true;
-        movementSystem.moveSpeed += movementSystem.moveSpeedBoost;
-        Debug.Log("Current Speed pressed: " + movementSystem.moveSpeed);
+        movementSystem.move.isSprinting = true;
+        movementSystem.move.moveSpeed += movementSystem.move.moveSpeedBoost;
+        Debug.Log("Current Speed pressed: " + movementSystem.move.moveSpeed);
     }
 
     public void RunCanceled()
     {
         Debug.Log("Canceled");
-        movementSystem.isSprinting = false;
-        movementSystem.moveSpeed = movementSystem.defaultMoveSpeed;
-        Debug.Log("Current Speed not pressed: " + movementSystem.moveSpeed);
+        movementSystem.move.isSprinting = false;
+        movementSystem.move.moveSpeed = _defaultMoveSpeed;
+        Debug.Log("Current Speed not pressed: " + movementSystem.move.moveSpeed);
     }
 }
