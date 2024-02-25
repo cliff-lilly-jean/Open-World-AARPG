@@ -844,7 +844,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 729396386}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.01335706, y: 0.986164, z: -0.13128276, w: 0.10033498}
+  m_LocalRotation: {x: 0.013357063, y: 0.986164, z: -0.13128276, w: 0.100334994}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2125,6 +2125,12 @@ PrefabInstance:
       propertyPath: _jumpStrength
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: -7233623613141425121, guid: 1d72a11a80ec58c44b77314be40c3358,
+        type: 3}
+      propertyPath: movementSystem
+      value: 
+      objectReference: {fileID: 11400000, guid: 870b1e86d1d484783b10c3f8548fe73b,
+        type: 2}
     - target: {fileID: -7233623613141425121, guid: 1d72a11a80ec58c44b77314be40c3358,
         type: 3}
       propertyPath: _gravityForceMultiplyer

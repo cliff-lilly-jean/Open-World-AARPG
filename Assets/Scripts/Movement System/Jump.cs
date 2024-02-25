@@ -3,18 +3,8 @@ using UnityEngine;
 public class Jump : MonoBehaviour
 {
     public PlayerController controller;
+    public MovementSystemSO movementSystem;
 
-    private bool _isGrounded;
-    private bool _isJumping;
-
-    private float _groundCheck;
-
-    [SerializeField] private float _jumpForceMultiplier = 100;
-    [SerializeField] private float _jumpStrength;
-    [SerializeField] private float _gravityForceMultiplyer = 6f;
-    [SerializeField] private float _bufferDistance = 0.1f;
-
-    // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<PlayerController>();
@@ -26,7 +16,7 @@ public class Jump : MonoBehaviour
         GroundCheck();
 
         // Gravity
-        if (!_isGrounded && !_isJumping)
+        if (!movementSystem.isGrounded && !movementSystem.isJumping)
         {
             if (controller._rb.velocity.y < 0.1)
             {
@@ -38,33 +28,33 @@ public class Jump : MonoBehaviour
 
     private void ApplyGravity()
     {
-        controller._rb.AddForce(Vector3.down * _gravityForceMultiplyer * Time.deltaTime, ForceMode.VelocityChange);
+        controller._rb.AddForce(Vector3.down * movementSystem.gravityForceMultiplier * Time.deltaTime, ForceMode.VelocityChange);
     }
 
     private void GroundCheck()
     {
         // Create a capsule buffer from the ground
-        _groundCheck = (GetComponent<CapsuleCollider>().height / 2) + _bufferDistance;
+        movementSystem.groundCheck = (GetComponent<CapsuleCollider>().height / 2) + movementSystem.bufferDistance;
 
         //Perform a raycast down
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, -transform.up, out hit, _groundCheck))
+        if (Physics.Raycast(transform.position, -transform.up, out hit, movementSystem.groundCheck))
         {
             // If grounded, Run the jump action
-            _isGrounded = true;
+            movementSystem.isGrounded = true;
         }
         else
         {
             // Don't allow Jump action
-            _isGrounded = false;
+            movementSystem.isGrounded = false;
         }
     }
 
     public void ApplyForce()
     {
 
-        controller._rb.AddForce(Vector3.up * _jumpStrength * _jumpForceMultiplier, ForceMode.Impulse);
+        controller._rb.AddForce(Vector3.up * movementSystem.jumpStrength * movementSystem.force, ForceMode.Impulse);
 
     }
 }

@@ -3,18 +3,21 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Systems/Movement")]
 public class MovementSystemSO : ScriptableObject
 {
+    public GameControls controls;
+
     // Jump
     public bool isGrounded;
     public bool isJumping;
 
     public float groundCheck;
     public float jumpStrength;
-    public float gravityForceMultiplyer = 6f;
+    public float gravityForceMultiplier = 6f;
     public float bufferDistance = 0.1f;
 
     // Move
     public Vector2 moveDirection;
     public PlayerController controller;
+    public Transform lookCamera;
 
     public float lookDirectionSmoothTime = 0.05f;
     public float moveSpeed;
@@ -27,4 +30,9 @@ public class MovementSystemSO : ScriptableObject
 
     // Shared
     public float force = 100;
+
+    private void Awake()
+    {
+        defaultMoveSpeed = moveSpeed;
+    }
 }

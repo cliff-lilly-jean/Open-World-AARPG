@@ -16,7 +16,7 @@ MonoBehaviour:
   isJumping: 0
   groundCheck: 0.1
   jumpStrength: 20
-  gravityForceMultiplyer: 6
+  gravityForceMultiplier: 105
   bufferDistance: 0.1
   moveDirection: {x: 0, y: 0}
   controller: {fileID: 0}
