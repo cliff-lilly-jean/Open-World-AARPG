@@ -7,6 +7,7 @@ public class MoveSO : ScriptableObject
 
     public float lookDirectionSmoothTime = 0.05f;
     public float moveSpeed;
+    public float defaultMoveSpeed;
     public float moveSpeedBoost;
     public float currentMoveVelocity;
 

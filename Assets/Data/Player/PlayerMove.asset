@@ -15,8 +15,8 @@ MonoBehaviour:
   moveDirection: {x: 0, y: 0}
   lookDirectionSmoothTime: 0.05
   moveSpeed: 20
+  defaultMoveSpeed: 20
   moveSpeedBoost: 60
-  defaultMoveSpeed: 0
   currentMoveVelocity: -1282.3623
   isSprinting: 0
   sprint: 0

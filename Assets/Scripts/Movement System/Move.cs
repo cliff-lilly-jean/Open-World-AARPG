@@ -12,7 +12,6 @@ public class Move : MonoBehaviour
     void Start()
     {
         controller = GetComponent<PlayerController>();
-        _defaultMoveSpeed = movementSystem.move.moveSpeed;
     }
 
     // Update is called once per frame
@@ -60,7 +59,7 @@ public class Move : MonoBehaviour
     {
         Debug.Log("Canceled");
         movementSystem.move.isSprinting = false;
-        movementSystem.move.moveSpeed = _defaultMoveSpeed;
+        movementSystem.move.moveSpeed = movementSystem.move.defaultMoveSpeed;
         Debug.Log("Current Speed not pressed: " + movementSystem.move.moveSpeed);
     }
 }
