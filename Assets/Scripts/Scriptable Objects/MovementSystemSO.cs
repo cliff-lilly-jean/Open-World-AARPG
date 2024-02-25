@@ -11,8 +11,5 @@ public class MovementSystemSO : ScriptableObject
 
     public float force = 100;
 
-    private void Awake()
-    {
-
-    }
+    // Use OnEnable to initialize Image, Transforms, Gameobjects
 }

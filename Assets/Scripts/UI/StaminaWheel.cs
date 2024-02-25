@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class StaminaWheel : MonoBehaviour
 {
-    StaminaSO stamina;
 
     [SerializeField] private Image _greenWheel;
     [SerializeField] private Image _redWheel;
@@ -17,6 +16,5 @@ public class StaminaWheel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _greenWheel.fillAmount = (stamina.stamina / stamina.maxStamina);
     }
 }

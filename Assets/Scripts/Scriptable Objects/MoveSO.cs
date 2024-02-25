@@ -14,4 +14,9 @@ public class MoveSO : ScriptableObject
 
     public bool isSprinting;
     public bool sprint;
+
+    private void OnEnable()
+    {
+        defaultMoveSpeed = moveSpeed;
+    }
 }

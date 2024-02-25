@@ -3,20 +3,16 @@ using UnityEngine;
 public class Move : MonoBehaviour
 {
     public PlayerController controller;
-    public Stamina stamina;
 
     public MovementSystemSO movementSystem;
-    public StaminaSO staminaSO;
 
     public Transform lookCamera;
 
-    private float _defaultMoveSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<PlayerController>();
-        stamina = GetComponent<Stamina>();
     }
 
     // Update is called once per frame
@@ -55,25 +51,11 @@ public class Move : MonoBehaviour
     {
         movementSystem.move.isSprinting = true;
         movementSystem.move.moveSpeed += movementSystem.move.moveSpeedBoost;
-
-        if (staminaSO.stamina > 0)
-        {
-            stamina.DecreaseStamina();
-        }
-        else
-        {
-            if (staminaSO.stamina < staminaSO.maxStamina)
-            {
-                stamina.IncreaseStamina();
-            }
-        }
     }
 
     public void RunCanceled()
     {
         movementSystem.move.isSprinting = false;
         movementSystem.move.moveSpeed = movementSystem.move.defaultMoveSpeed;
-
-
     }
 }
