@@ -16,7 +16,7 @@ public class Jump : MonoBehaviour
         GroundCheck();
 
         // Gravity
-        if (!movementSystem.isGrounded && !movementSystem.isJumping)
+        if (!movementSystem.jump.isGrounded && !movementSystem.isJumping)
         {
             if (controller._rb.velocity.y < 0.1)
             {
