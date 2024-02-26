@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 4472927743110472539}
   - component: {fileID: 6974122350967252845}
   - component: {fileID: 4861082092823328614}
+  - component: {fileID: 7490329181068481884}
   m_Layer: 5
   m_Name: Stamina Wheel
   m_TagString: Untagged
@@ -182,6 +183,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7490329181068481884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464583131867077532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d2ed31f2eb09364aa01b131fc0a8b9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSystem: {fileID: 11400000, guid: 870b1e86d1d484783b10c3f8548fe73b, type: 2}
+  _wheelFillSpeedOffset: 0.015
+  _greenWheel: {fileID: 2281835903770128936}
+  _redWheel: {fileID: 1644146075759766788}
 --- !u!1 &1159894666336300759
 GameObject:
   m_ObjectHideFlags: 0

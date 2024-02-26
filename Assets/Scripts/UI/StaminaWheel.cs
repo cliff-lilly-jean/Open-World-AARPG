@@ -65,3 +65,5 @@ public class StaminaWheel : MonoBehaviour
         _greenWheel.fillAmount = (_stamina / _maxStamina);
     }
 }
+
+
