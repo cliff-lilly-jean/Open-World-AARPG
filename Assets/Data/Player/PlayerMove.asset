@@ -17,6 +17,6 @@ MonoBehaviour:
   moveSpeed: 20
   defaultMoveSpeed: 20
   moveSpeedBoost: 60
-  currentMoveVelocity: -1282.3623
+  currentMoveVelocity: -1243.7026
   isSprinting: 0
   sprint: 0

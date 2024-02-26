@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    Jump jump;
-    Move move;
+    // Jump jump;
+    // Move move;
 
     public GameControls controls;
     public Rigidbody _rb;
@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        jump = GetComponent<Jump>();
-        move = GetComponent<Move>();
+        Jump jump = GetComponent<Jump>();
+        Move move = GetComponent<Move>();
 
         controls = new GameControls();
 
@@ -32,12 +32,12 @@ public class PlayerController : MonoBehaviour
 
     public void OnEnable()
     {
-        controls.Gameplay.Enable();
+        controls.Enable();
     }
 
     public void OnDisable()
     {
-        controls.Gameplay.Disable();
+        controls.Disable();
     }
 }
 

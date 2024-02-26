@@ -4,6 +4,7 @@ using UnityEngine.UI;
 [CreateAssetMenu(menuName = "Systems/Movement/Mechanics/Move")]
 public class MoveSO : ScriptableObject
 {
+
     public Vector2 moveDirection;
 
     public float lookDirectionSmoothTime = 0.05f;
