@@ -3,7 +3,7 @@ using UnityEngine;
 public class Move : MonoBehaviour
 {
     public PlayerController controller;
-    Move move;
+    // Move move;
 
     public MovementSystemSO movementSystem;
 
@@ -14,7 +14,7 @@ public class Move : MonoBehaviour
     void Start()
     {
         controller = GetComponent<PlayerController>();
-        move = GetComponent<Move>();
+        // move = GetComponent<Move>();
     }
 
     // Update is called once per frame
