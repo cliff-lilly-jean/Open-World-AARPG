@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fef0cff19f4774047b19ab92db1bedba, type: 3}
+  m_Name: PlayerStamina
+  m_EditorClassIdentifier: 
+  movementSystem: {fileID: 11400000, guid: 870b1e86d1d484783b10c3f8548fe73b, type: 2}
+  _stamina: 100
+  _maxStamina: 100
+  _staminaExhausted: 0
+  _wheelFillSpeedOffset: 0.015
