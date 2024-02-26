@@ -52,7 +52,16 @@ public class Move : MonoBehaviour
     public void Run()
     {
         movementSystem.move.isSprinting = true;
-        movementSystem.move.moveSpeed += movementSystem.move.moveSpeedBoost;
+
+        if (movementSystem.move.isSprinting && movementSystem.stamina._stamina >= movementSystem.stamina._maxStamina)
+        {
+            movementSystem.move.moveSpeed += movementSystem.move.moveSpeedBoost;
+        }
+        else
+        {
+            movementSystem.move.moveSpeed = movementSystem.move.defaultMoveSpeed;
+        }
+
     }
 
     public void RunCanceled()
