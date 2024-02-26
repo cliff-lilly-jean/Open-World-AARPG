@@ -30,12 +30,16 @@ public class StaminaWheel : MonoBehaviour
         {
             if (_stamina > 0)
             {
+                _greenWheel.enabled = true;
+                _redWheel.enabled = true;
+
                 _stamina -= 15 * Time.deltaTime;
             }
             else
             {
                 _greenWheel.enabled = false;
                 _staminaExhausted = true;
+                // TODO make a glow effect when stamina is exhausted
             }
 
             _redWheel.fillAmount = (_stamina / _maxStamina + (_wheelFillSpeedOffset + .005f));
@@ -48,14 +52,16 @@ public class StaminaWheel : MonoBehaviour
             }
             else
             {
-                _greenWheel.enabled = true;
                 _staminaExhausted = false;
+
+                // Hide wheels until isSprinting
+                _greenWheel.enabled = false;
+                _redWheel.enabled = false;
             }
 
             _redWheel.fillAmount = (_stamina / _maxStamina + (_wheelFillSpeedOffset + .005f));
         }
 
         _greenWheel.fillAmount = (_stamina / _maxStamina);
-
     }
 }
