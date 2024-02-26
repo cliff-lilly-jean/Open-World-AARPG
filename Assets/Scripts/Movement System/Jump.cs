@@ -20,7 +20,6 @@ public class Jump : MonoBehaviour
         {
             if (controller._rb.velocity.y < 0.1)
             {
-                Debug.Log("Down");
                 ApplyGravity();
             }
         }
