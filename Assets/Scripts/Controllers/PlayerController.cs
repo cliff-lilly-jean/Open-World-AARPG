@@ -4,9 +4,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    // Jump jump;
-    // Move move;
-
     public GameControls controls;
     public Rigidbody _rb;
 
