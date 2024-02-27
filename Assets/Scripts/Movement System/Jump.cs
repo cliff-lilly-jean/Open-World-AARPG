@@ -16,7 +16,7 @@ public class Jump : MonoBehaviour
         GroundCheck();
 
         // Gravity
-        if (!movementSystem.jump.isGrounded && !movementSystem.jump.isJumping)
+        if (!movementSystem.jump.isGrounded)
         {
             if (controller._rb.velocity.y < 0.1)
             {
@@ -44,33 +44,17 @@ public class Jump : MonoBehaviour
         {
             // If grounded, Run the jump action
             movementSystem.jump.isGrounded = true;
-            movementSystem.jump.isJumping = false;
-            movementSystem.jump.numberOfJumpsLeft = movementSystem.jump.maxNumberOfJumps;
         }
         else
         {
             // Don't allow Jump action
             movementSystem.jump.isGrounded = false;
-            movementSystem.jump.isJumping = true;
         }
     }
 
     public void ApplyForce()
     {
-
-        if (movementSystem.jump.numberOfJumpsLeft >= 1)
-        {
-            movementSystem.jump.numberOfJumpsLeft--;
-
-            controller._rb.AddForce(Vector3.up * movementSystem.jump.jumpStrength * movementSystem.force, ForceMode.Impulse);
-
-            if (movementSystem.jump.isJumping)
-            {
-                movementSystem.jump.numberOfJumpsLeft--;
-            }
-        }
-
-
+        controller._rb.AddForce(Vector3.up * movementSystem.jump.jumpStrength * movementSystem.force, ForceMode.Impulse);
     }
 }
 
