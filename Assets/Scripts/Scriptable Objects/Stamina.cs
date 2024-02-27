@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Systems/Movement/Stamina")]
-public class StaminaSO : ScriptableObject
+public class Stamina : ScriptableObject
 {
-    public MovementSystemSO movementSystem;
+    public MovementSystem movementSystem;
 
     public float _stamina;
     public float _maxStamina = 100f;
