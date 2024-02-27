@@ -23,6 +23,8 @@ public class Jump : MonoBehaviour
                 ApplyGravity();
             }
         }
+
+
     }
 
     private void ApplyGravity()
@@ -42,18 +44,32 @@ public class Jump : MonoBehaviour
         {
             // If grounded, Run the jump action
             movementSystem.jump.isGrounded = true;
+            movementSystem.jump.isJumping = false;
+            movementSystem.jump.numberOfJumpsLeft = movementSystem.jump.maxNumberOfJumps;
         }
         else
         {
             // Don't allow Jump action
             movementSystem.jump.isGrounded = false;
+            movementSystem.jump.isJumping = true;
         }
     }
 
     public void ApplyForce()
     {
 
-        controller._rb.AddForce(Vector3.up * movementSystem.jump.jumpStrength * movementSystem.force, ForceMode.Impulse);
+        if (movementSystem.jump.numberOfJumpsLeft >= 1)
+        {
+            movementSystem.jump.numberOfJumpsLeft--;
+
+            controller._rb.AddForce(Vector3.up * movementSystem.jump.jumpStrength * movementSystem.force, ForceMode.Impulse);
+
+            if (movementSystem.jump.isJumping)
+            {
+                movementSystem.jump.numberOfJumpsLeft--;
+            }
+        }
+
 
     }
 }
