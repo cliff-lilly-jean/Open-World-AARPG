@@ -2271,7 +2271,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: d052cd834ec2a944882989f7b8131811, type: 2}
+      objectReference: {fileID: 9100000, guid: 3bb24ae9e7a90cc4badcfb074957b299, type: 2}
     - target: {fileID: 3116514364520364409, guid: 532e28257d7189848853de082b72a2de,
         type: 3}
       propertyPath: m_Name
@@ -2416,6 +2416,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6763654642807022418, guid: 532e28257d7189848853de082b72a2de,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.0627451
       objectReference: {fileID: 0}
     - target: {fileID: 7084255282951061426, guid: 532e28257d7189848853de082b72a2de,
         type: 3}

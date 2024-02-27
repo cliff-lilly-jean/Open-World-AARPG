@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Move : MonoBehaviour
+public class MoveController : MonoBehaviour
 {
     public PlayerController controller;
     // Move move;

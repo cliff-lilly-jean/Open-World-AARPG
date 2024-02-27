@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        Jump jump = GetComponent<Jump>();
-        Move move = GetComponent<Move>();
+        JumpController jump = GetComponent<JumpController>();
+        MoveController move = GetComponent<MoveController>();
 
         controls = new GameControls();
 

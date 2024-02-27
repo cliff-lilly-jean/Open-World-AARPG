@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class StaminaWheel : MonoBehaviour
 {
-    public StaminaSO stamina;
+    public Stamina stamina;
 
     [SerializeField] private Image _greenWheel;
     [SerializeField] private Image _redWheel;
