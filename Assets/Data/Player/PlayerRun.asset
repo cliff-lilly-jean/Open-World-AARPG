@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ab75eddb5c334763b67f1e00f1e447c, type: 3}
-  m_Name: PlayerMove
+  m_Script: {fileID: 11500000, guid: 39a0c5ae4f3ae8048b0ad71ef611bfd9, type: 3}
+  m_Name: PlayerRun
   m_EditorClassIdentifier: 
-  moveDirection: {x: 0, y: 0}
-  lookDirectionSmoothTime: 0.05
-  moveSpeed: 20
-  defaultMoveSpeed: 20
-  moveSpeedBoost: 60
-  currentMoveVelocity: -1243.7026
+  movementSystem: {fileID: 11400000, guid: 870b1e86d1d484783b10c3f8548fe73b, type: 2}
   isSprinting: 0
   sprint: 0
+  defaultMoveSpeed: 0
+  moveSpeedBoost: 60

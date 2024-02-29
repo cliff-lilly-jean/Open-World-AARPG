@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Systems/Movement/Mechanics/Jump")]
-public class Jump : ScriptableObject
+public class JumpData : ScriptableObject
 {
     public bool isGrounded;
     public bool isJumping;

@@ -5,14 +5,13 @@ public class Run : MonoBehaviour
     public MovementSystem movementSystem;
 
 
-
     public void Activate()
     {
-        movementSystem.move.isSprinting = true;
+        movementSystem.run.isSprinting = true;
 
-        if (movementSystem.move.isSprinting && movementSystem.stamina._stamina > 0)
+        if (movementSystem.run.isSprinting && movementSystem.stamina._stamina > 0)
         {
-            movementSystem.move.moveSpeed += movementSystem.move.moveSpeedBoost;
+            movementSystem.walk.moveSpeed += movementSystem.run.moveSpeedBoost;
             Debug.Log("Move" + movementSystem.stamina._stamina);
 
         }
@@ -28,7 +27,7 @@ public class Run : MonoBehaviour
 
     public void Cancel()
     {
-        movementSystem.move.isSprinting = false;
-        movementSystem.move.moveSpeed = movementSystem.move.defaultMoveSpeed;
+        movementSystem.run.isSprinting = false;
+        movementSystem.walk.moveSpeed = movementSystem.run.defaultMoveSpeed;
     }
 }

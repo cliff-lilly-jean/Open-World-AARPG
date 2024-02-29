@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class StaminaWheel : MonoBehaviour
 {
-    public Stamina stamina;
+    public StaminaData stamina;
 
     [SerializeField] private Image _greenWheel;
     [SerializeField] private Image _redWheel;
@@ -12,7 +12,7 @@ public class StaminaWheel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (stamina.movementSystem.move.isSprinting && !stamina._staminaExhausted)
+        if (stamina.movementSystem.run.isSprinting && !stamina._staminaExhausted)
         {
             if (stamina._stamina > 0)
             {

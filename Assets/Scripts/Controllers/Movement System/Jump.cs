@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class JumpController : MonoBehaviour
+public class Jump : MonoBehaviour
 {
     public PlayerController controller;
     public MovementSystem movementSystem;

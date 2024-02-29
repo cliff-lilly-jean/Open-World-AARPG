@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 6012268602136723701}
   - component: {fileID: 8302124269276602215}
   - component: {fileID: 7084255282951061426}
+  - component: {fileID: 2865384915609231617}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -236,6 +237,19 @@ CapsuleCollider:
   m_Height: 1.5754013
   m_Direction: 1
   m_Center: {x: 0.01, y: 0.729937, z: 0}
+--- !u!114 &2865384915609231617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3116514364520364409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2811f38071ec57409a1a7930609366b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSystem: {fileID: 11400000, guid: 870b1e86d1d484783b10c3f8548fe73b, type: 2}
 --- !u!1 &3405089945227804961
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,7 +444,7 @@ Animator:
   m_GameObject: {fileID: 4287423891926831872}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f6605568d3cd20e4db1a0b19cfe83787, type: 3}
-  m_Controller: {fileID: 9100000, guid: d052cd834ec2a944882989f7b8131811, type: 2}
+  m_Controller: {fileID: 9100000, guid: a8555c0cff30527479e32562cef9141f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2051,7 +2065,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.101960786}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.0627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Systems/Movement/Stamina")]
-public class Stamina : ScriptableObject
+public class StaminaData : ScriptableObject
 {
     public MovementSystem movementSystem;
 
