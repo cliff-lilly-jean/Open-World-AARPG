@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ab75eddb5c334763b67f1e00f1e447c, type: 3}
   m_Name: PlayerWalk
   m_EditorClassIdentifier: 
-  moveDirection: {x: 0, y: 1}
+  moveDirection: {x: 1, y: 0}
   lookDirectionSmoothTime: 0.015
   moveSpeed: 20
-  currentMoveVelocity: -2667.9482
+  currentMoveVelocity: 6832.597

@@ -26,7 +26,7 @@ public class Walk : MonoBehaviour
     {
         // Move
         if (movementSystem.walk.moveDirection.sqrMagnitude == 0) return;
-        Start();
+        Activate();
     }
 
     public void Activate()
