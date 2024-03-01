@@ -3,6 +3,13 @@ using UnityEngine;
 public class Run : MonoBehaviour
 {
     public MovementSystem movementSystem;
+    PlayerController controller;
+
+
+    void Start()
+    {
+        controller = GetComponent<PlayerController>();
+    }
 
 
     public void Activate()
@@ -12,15 +19,12 @@ public class Run : MonoBehaviour
         if (movementSystem.run.isSprinting && movementSystem.stamina._stamina > 0)
         {
             movementSystem.walk.moveSpeed += movementSystem.run.moveSpeedBoost;
-            Debug.Log("Move" + movementSystem.stamina._stamina);
-
         }
         else
         {
             if (movementSystem.stamina._stamina <= 0)
             {
                 Cancel();
-                Debug.Log("Regaining stamina");
             }
         }
     }

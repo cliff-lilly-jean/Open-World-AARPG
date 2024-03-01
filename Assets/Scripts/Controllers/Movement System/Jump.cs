@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Jump : MonoBehaviour
 {
@@ -8,21 +9,24 @@ public class Jump : MonoBehaviour
     void Start()
     {
         controller = GetComponent<PlayerController>();
+        controller.controls.Gameplay.Jump.performed += ctx => Activate(ctx);
     }
 
     // Update is called once per frame
     void Update()
     {
-        GroundCheck();
+        // Ground check
+        IsGrounded();
 
-        // Gravity
-        if (!movementSystem.jump.isGrounded)
+        if (!IsGrounded())
         {
-            if (controller._rb.velocity.y < 0.1)
-            {
-                ApplyGravity();
-            }
+            movementSystem.jump.isJumping = false;
+            ApplyGravity();
         }
+    }
+
+    private void FixedUpdate()
+    {
 
 
     }
@@ -32,29 +36,21 @@ public class Jump : MonoBehaviour
         controller._rb.AddForce(Vector3.down * movementSystem.jump.gravityForceMultiplier * Time.deltaTime, ForceMode.VelocityChange);
     }
 
-    private void GroundCheck()
+    private bool IsGrounded()
     {
-        // Create a capsule buffer from the ground
-        movementSystem.jump.groundCheck = (GetComponent<CapsuleCollider>().height / 2) + movementSystem.jump.bufferDistance;
 
-        //Perform a raycast down
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, -transform.up, out hit, movementSystem.jump.groundCheck))
-        {
-            // If grounded, Run the jump action
-            movementSystem.jump.isGrounded = true;
-        }
-        else
-        {
-            // Don't allow Jump action
-            movementSystem.jump.isGrounded = false;
-        }
+        return Physics.Raycast(transform.position, Vector3.down, movementSystem.jump.groundDistance);
     }
 
-    public void Activate()
+    public void Activate(InputAction.CallbackContext context)
     {
-        controller._rb.AddForce(Vector3.up * movementSystem.jump.jumpStrength * movementSystem.force, ForceMode.Impulse);
+        if (context.performed && IsGrounded())
+        {
+            controller._rb.AddForce(Vector3.up * movementSystem.jump.jumpStrength * movementSystem.force, ForceMode.Impulse);
+
+            movementSystem.jump.isJumping = true;
+        }
+
     }
 }
 

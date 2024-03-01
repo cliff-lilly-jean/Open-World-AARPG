@@ -13,10 +13,7 @@ MonoBehaviour:
   m_Name: PlayerJump
   m_EditorClassIdentifier: 
   isGrounded: 0
-  isJumping: 1
-  groundCheck: 0.1
+  isJumping: 0
+  groundDistance: 0.5
   jumpStrength: 20
-  gravityForceMultiplier: 90
-  bufferDistance: 0.1
-  numberOfJumpsLeft: -1
-  maxNumberOfJumps: 1
+  gravityForceMultiplier: 60
