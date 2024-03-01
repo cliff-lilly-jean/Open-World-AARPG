@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+// [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
     public GameControls controls;
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
         controls.Gameplay.Jump.performed += _ => jump.Activate();
 
         // Move
-        controls.Gameplay.Move.performed += _ => walk.Activate();
+        controls.Gameplay.Walk.performed += _ => walk.Activate();
 
         // Run
         controls.Gameplay.Run.performed += _ => run.Activate();

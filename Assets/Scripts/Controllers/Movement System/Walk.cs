@@ -1,13 +1,12 @@
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class Walk : MonoBehaviour
 {
     public PlayerController controller;
-
-
     public MovementSystem movementSystem;
-
     public Transform lookCamera;
+
 
 
     // Start is called before the first frame update
@@ -25,7 +24,7 @@ public class Walk : MonoBehaviour
     private void FixedUpdate()
     {
         // Move
-        if (movementSystem.walk.moveDirection.sqrMagnitude == 0) return;
+        if (movementSystem.walk.moveDirection.sqrMagnitude == 0) { };
         Activate();
     }
 
@@ -33,7 +32,7 @@ public class Walk : MonoBehaviour
     {
 
         // Get input
-        movementSystem.walk.moveDirection = controller.controls.Gameplay.Move.ReadValue<Vector2>();
+        movementSystem.walk.moveDirection = controller.controls.Gameplay.Walk.ReadValue<Vector2>();
 
         // Get direction angles
         var lookDirection = Mathf.Atan2(movementSystem.walk.moveDirection.x, movementSystem.walk.moveDirection.y) * Mathf.Rad2Deg + lookCamera.eulerAngles.y;

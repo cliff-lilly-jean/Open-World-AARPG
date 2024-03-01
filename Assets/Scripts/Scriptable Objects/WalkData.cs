@@ -10,4 +10,6 @@ public class WalkData : ScriptableObject
     public float moveSpeed;
 
     public float currentMoveVelocity;
+
+    public bool isWalking;
 }
