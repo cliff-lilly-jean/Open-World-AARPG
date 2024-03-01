@@ -12,26 +12,27 @@ public class Run : MonoBehaviour
     }
 
 
-    public void Activate()
-    {
-        movementSystem.run.isSprinting = true;
+    // public void Activate()
+    // {
+    //     movementSystem.run.isSprinting = true;
 
-        if (movementSystem.run.isSprinting && movementSystem.stamina._stamina > 0)
-        {
-            movementSystem.walk.moveSpeed += movementSystem.run.moveSpeedBoost;
-        }
-        else
-        {
-            if (movementSystem.stamina._stamina <= 0)
-            {
-                Cancel();
-            }
-        }
-    }
+    //     if (movementSystem.run.isSprinting && movementSystem.stamina._stamina > 0)
+    //     {
+    //         movementSystem.walk.moveSpeed += movementSystem.run.moveSpeedBoost;
 
-    public void Cancel()
-    {
-        movementSystem.run.isSprinting = false;
-        movementSystem.walk.moveSpeed = movementSystem.run.defaultMoveSpeed;
-    }
+    //         Debug.Log(movementSystem.walk.moveSpeed);
+    //     }
+    //     else
+    //     {
+    //         Cancel();
+    //     }
+    // }
+
+    // public void Cancel()
+    // {
+    //     movementSystem.run.isSprinting = false;
+    //     movementSystem.walk.moveSpeed += movementSystem.run.defaultMoveSpeed;
+
+    //     Debug.Log(movementSystem.walk.moveSpeed);
+    // }
 }

@@ -15,5 +15,5 @@ MonoBehaviour:
   movementSystem: {fileID: 11400000, guid: 870b1e86d1d484783b10c3f8548fe73b, type: 2}
   _stamina: 100
   _maxStamina: 100
-  _staminaExhausted: 0
+  _staminaExhausted: 1
   _wheelFillSpeedOffset: 0.015

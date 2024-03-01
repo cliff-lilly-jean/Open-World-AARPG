@@ -5,7 +5,7 @@ public class RunData : ScriptableObject
 {
     public MovementSystem movementSystem;
 
-    public bool isSprinting;
+    public bool isRunning;
     public bool sprint;
 
     public float defaultMoveSpeed;

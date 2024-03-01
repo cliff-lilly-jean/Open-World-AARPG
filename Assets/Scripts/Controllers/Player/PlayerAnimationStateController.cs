@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerAnimationStateController : MonoBehaviour
 {
     PlayerController controller;
-    MovementSystem movementSystem;
+    public MovementSystem movementSystem;
     Animator animator;
 
     private bool _isWalking;
@@ -19,8 +19,8 @@ public class PlayerAnimationStateController : MonoBehaviour
         controller.controls.Gameplay.Walk.performed += ctx => IsWalking(ctx);
         controller.controls.Gameplay.Walk.canceled += ctx => IsWalking(ctx);
 
-        controller.controls.Gameplay.Run.performed += ctx => isSprinting(ctx);
-        controller.controls.Gameplay.Run.canceled += ctx => isSprinting(ctx);
+        controller.controls.Gameplay.Run.performed += ctx => IsRunning(ctx);
+        controller.controls.Gameplay.Run.canceled += ctx => IsRunning(ctx);
     }
 
     // Start is called before the first frame update
@@ -52,17 +52,25 @@ public class PlayerAnimationStateController : MonoBehaviour
     }
 
     // Run
-    public void isSprinting(InputAction.CallbackContext context)
+    public void IsRunning(InputAction.CallbackContext context)
     {
         if (context.performed && _isWalking)
         {
-            animator.SetBool("isSprinting", true);
+            animator.SetBool("isRunning", true);
+            movementSystem.run.isRunning = true;
+
+            if (movementSystem.run.isRunning && movementSystem.stamina._stamina > 0)
+            {
+                movementSystem.walk.moveSpeed = movementSystem.walk.moveSpeed + movementSystem.run.moveSpeedBoost;
+            }
         }
 
         if (context.canceled || !_isWalking)
         {
-            animator.SetBool("isSprinting", false);
-            // movementSystem.run.isSprinting = false;
+            animator.SetBool("isRunning", false);
+
+            movementSystem.run.isRunning = false;
+            movementSystem.walk.moveSpeed = movementSystem.run.defaultMoveSpeed;
         }
     }
 }

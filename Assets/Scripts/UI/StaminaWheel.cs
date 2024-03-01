@@ -12,7 +12,7 @@ public class StaminaWheel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (stamina.movementSystem.run.isSprinting && !stamina._staminaExhausted)
+        if (stamina.movementSystem.run.isRunning && !stamina._staminaExhausted)
         {
             if (stamina._stamina > 0)
             {
@@ -40,7 +40,7 @@ public class StaminaWheel : MonoBehaviour
             {
                 stamina._staminaExhausted = false;
 
-                // Hide wheels until isSprinting
+                // Hide wheels until isRunning
                 _greenWheel.enabled = false;
                 _redWheel.enabled = false;
             }
