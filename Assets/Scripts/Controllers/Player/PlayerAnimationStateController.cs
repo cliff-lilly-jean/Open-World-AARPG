@@ -6,6 +6,8 @@ public class PlayerAnimationStateController : MonoBehaviour
     PlayerController controller;
     Animator animator;
 
+    private bool _isWalking;
+
 
     private void Awake()
     {
@@ -25,13 +27,16 @@ public class PlayerAnimationStateController : MonoBehaviour
     {
         controller = GetComponent<PlayerController>();
         animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        _isWalking = animator.GetBool("isWalking");
     }
 
+    // Walk
     public void IsWalking(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -47,15 +52,16 @@ public class PlayerAnimationStateController : MonoBehaviour
         }
     }
 
+    // Run
     public void IsRunning(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && _isWalking)
         {
             Debug.Log("True");
             animator.SetBool("isRunning", true);
         }
 
-        if (context.canceled)
+        if (context.canceled || !_isWalking)
         {
             Debug.Log("False");
             animator.SetBool("isRunning", false);
