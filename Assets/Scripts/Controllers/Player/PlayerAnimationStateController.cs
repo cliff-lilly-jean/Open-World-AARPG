@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerAnimationStateController : MonoBehaviour
 {
-    PlayerController controller;
+    public PlayerController controller;
     public MovementSystem movementSystem;
     Animator animator;
 
@@ -15,19 +15,18 @@ public class PlayerAnimationStateController : MonoBehaviour
         controller = GetComponent<PlayerController>();
         animator = GetComponent<Animator>();
 
+
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
         // * note: Run a method when the walk method is run that toggles the animator true or false
         controller.controls.Gameplay.Walk.performed += ctx => IsWalking(ctx);
         controller.controls.Gameplay.Walk.canceled += ctx => IsWalking(ctx);
 
         controller.controls.Gameplay.Run.performed += ctx => IsRunning(ctx);
         controller.controls.Gameplay.Run.canceled += ctx => IsRunning(ctx);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        controller = GetComponent<PlayerController>();
-        animator = GetComponent<Animator>();
 
     }
 
