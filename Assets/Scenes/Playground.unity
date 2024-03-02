@@ -1197,7 +1197,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1505783002}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10972177, y: 0.7461242, z: -0.12706321, w: 0.6442941}
+  m_LocalRotation: {x: 0.10972177, y: 0.74612415, z: -0.12706321, w: 0.644294}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1344,6 +1344,18 @@ Transform:
   - {fileID: 122381791}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1882339127 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6012268602136723701, guid: 532e28257d7189848853de082b72a2de,
+    type: 3}
+  m_PrefabInstance: {fileID: 2730330067265611341}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc455e6342027e4b8652029325b244a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1961837312
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,10 +1475,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2865384915609231617, guid: 532e28257d7189848853de082b72a2de,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3116514364520364409, guid: 532e28257d7189848853de082b72a2de,
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6884665302062359358, guid: 532e28257d7189848853de082b72a2de,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8007107204114114095, guid: 532e28257d7189848853de082b72a2de,
+        type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 1882339127}
+    - target: {fileID: 8007107204114114095, guid: 532e28257d7189848853de082b72a2de,
+        type: 3}
+      propertyPath: acceleration
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8007107204114114095, guid: 532e28257d7189848853de082b72a2de,
         type: 3}
@@ -1474,6 +1506,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 870b1e86d1d484783b10c3f8548fe73b,
         type: 2}
+    - target: {fileID: 8302124269276602215, guid: 532e28257d7189848853de082b72a2de,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8302124269276602215, guid: 532e28257d7189848853de082b72a2de,
         type: 3}
       propertyPath: lookCamera

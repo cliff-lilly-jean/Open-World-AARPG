@@ -8,6 +8,9 @@ public class PlayerAnimationStateController : MonoBehaviour
     Animator animator;
 
     private bool _isWalking;
+    float velocity = 0.0f;
+    public float acceleration = 0.1f;
+    public float deceleration = 0.5f;
 
 
     private void Awake()
@@ -33,20 +36,46 @@ public class PlayerAnimationStateController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _isWalking = animator.GetBool("isWalking");
+        // Walk
+        ActivateWalk();
     }
 
-    // Walk
+    public void ActivateWalk()
+    {
+        if (_isWalking && velocity < 1.0f)
+        {
+            velocity += Time.deltaTime * acceleration;
+        }
+
+        if (!_isWalking && velocity > 0.0f)
+        {
+            velocity -= Time.deltaTime * deceleration;
+        }
+
+        if (!_isWalking && velocity < 0.0f)
+        {
+            velocity = 0.0f;
+        }
+
+        // animator.SetFloat("Velocity", velocity);
+    }
+
+
     public void IsWalking(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            animator.SetBool("isWalking", true);
+            _isWalking = true;
         }
 
-        if (context.canceled)
+        if (context.canceled && velocity > 0.0f)
         {
-            animator.SetBool("isWalking", false);
+            _isWalking = false;
+        }
+
+        if (context.canceled && velocity < 0.0f)
+        {
+            _isWalking = false;
         }
     }
 
