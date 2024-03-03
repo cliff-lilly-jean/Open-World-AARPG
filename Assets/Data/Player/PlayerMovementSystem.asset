@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerMovementSystem
   m_EditorClassIdentifier: 
   walk: {fileID: 11400000, guid: 45bb991f68096384b9962b0919daf9f8, type: 2}
-  jump: {fileID: 11400000, guid: 0c4d7e38b1a5f314bad98de2dbb11b92, type: 2}
-  run: {fileID: 11400000, guid: eb469cfc8d21e354e9091b6e6a52ea1a, type: 2}
-  stamina: {fileID: 11400000, guid: 709d488e92d4c7a4e83d9a06a2dfc16f, type: 2}
+  leap: {fileID: 11400000, guid: 0c4d7e38b1a5f314bad98de2dbb11b92, type: 2}
+  sprint: {fileID: 11400000, guid: eb469cfc8d21e354e9091b6e6a52ea1a, type: 2}
+  endurance: {fileID: 11400000, guid: 709d488e92d4c7a4e83d9a06a2dfc16f, type: 2}
   force: 100

@@ -4,10 +4,15 @@ using UnityEngine.UI;
 public class StaminaWheel : MonoBehaviour
 {
     public Endurance endurance;
-    MovementSystem movementSystem;
+    public MovementSystem movementSystem;
 
     [SerializeField] private Image _greenWheel;
     [SerializeField] private Image _redWheel;
+
+    private void Awake()
+    {
+        // endurance = GetComponent<Endurance>();
+    }
 
 
     // Update is called once per frame
