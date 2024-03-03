@@ -1,13 +1,13 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Systems/Movement/Movement System")]
+[CreateAssetMenu(menuName = "Systems/MovementSystem/MovementSystem System")]
 public class MovementSystem : ScriptableObject
 {
 
-    public WalkData walk;
-    public JumpData jump;
-    public RunData run;
-    public StaminaData stamina;
+    public Walk walk;
+    public Leap leap;
+    public Sprint sprint;
+    public Endurance endurance;
 
     public float force = 100;
 

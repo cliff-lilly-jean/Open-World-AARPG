@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
     public GameControls controls;
@@ -10,8 +10,17 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
+        // Input System Controls
         controls = new GameControls();
+
+        // Rigidbody
+        _rb = GetComponent<Rigidbody>();
+
+    }
+
+    private void Start()
+    {
+
     }
 
     public void OnEnable()

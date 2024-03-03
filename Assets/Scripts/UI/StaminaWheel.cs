@@ -3,7 +3,8 @@ using UnityEngine.UI;
 
 public class StaminaWheel : MonoBehaviour
 {
-    public StaminaData stamina;
+    public Endurance endurance;
+    MovementSystem movementSystem;
 
     [SerializeField] private Image _greenWheel;
     [SerializeField] private Image _redWheel;
@@ -12,43 +13,43 @@ public class StaminaWheel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (stamina.movementSystem.run.isRunning && !stamina._staminaExhausted)
+        if (movementSystem.sprint.isRunning && !endurance._staminaExhausted)
         {
-            if (stamina._stamina > 0)
+            if (endurance._stamina > 0)
             {
                 _greenWheel.enabled = true;
                 _redWheel.enabled = true;
 
-                stamina._stamina -= 15 * Time.deltaTime;
+                endurance._stamina -= 15 * Time.deltaTime;
             }
             else
             {
                 _greenWheel.enabled = false;
-                stamina._staminaExhausted = true;
-                // TODO make a glow effect when stamina is exhausted
+                endurance._staminaExhausted = true;
+                // TODO make a glow effect when endurance is exhausted
             }
 
-            _redWheel.fillAmount = (stamina._stamina / stamina._maxStamina + (stamina._wheelFillSpeedOffset + .005f));
+            _redWheel.fillAmount = (endurance._stamina / endurance._maxStamina + (endurance._wheelFillSpeedOffset + .005f));
         }
         else
         {
-            if (stamina._stamina < stamina._maxStamina)
+            if (endurance._stamina < endurance._maxStamina)
             {
-                stamina._stamina += 10 * Time.deltaTime;
+                endurance._stamina += 10 * Time.deltaTime;
             }
             else
             {
-                stamina._staminaExhausted = false;
+                endurance._staminaExhausted = false;
 
                 // Hide wheels until isRunning
                 _greenWheel.enabled = false;
                 _redWheel.enabled = false;
             }
 
-            _redWheel.fillAmount = (stamina._stamina / stamina._maxStamina + (stamina._wheelFillSpeedOffset + .005f));
+            _redWheel.fillAmount = (endurance._stamina / endurance._maxStamina + (endurance._wheelFillSpeedOffset + .005f));
         }
 
-        _greenWheel.fillAmount = (stamina._stamina / stamina._maxStamina);
+        _greenWheel.fillAmount = (endurance._stamina / endurance._maxStamina);
     }
 }
 
